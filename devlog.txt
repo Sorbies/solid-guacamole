@@ -1,0 +1,70 @@
+michelleT  -- 2020-12-17 21:30
+Made base files with teammates, worked on design.pdf, updated README to include basic starting information.
+
+michelleT  -- 2020-12-21 20:58
+Made new design document for scenario two, added to repository, updated README with up-to-date information
+
+pakL  -- 2021-1-6 10:13
+- Created four templates
+    - general.html -> general blog page (what the user sees first if they are already logged in)
+    - login_or_register.html -> page that allows you to go to the login or the register page (what the user sees first if they are not logged in)
+    - login.html -> login page
+    - register.html -> register page
+- Updated __init__.py
+    - root() redirects the user to general.html or login_or_register.html depending on login status
+    - register() will handle registration
+    - credentialsWork() will return whether session credentials are in the database and work
+
+pakL  -- 2021-1-6 22:17
+- Finished login and registration
+    - login and registration pages have their own errors for when there is nothing inputted
+    - login page has errors for incorrect credentials
+    - registration page have errors for mismatching passwords, user already existing, and when there is non-alphanumeric characters in the username
+    - registration page leads to a successful registration page that has a button leading to the login page
+    - after a successful login, the pages lead to the general page
+- db.py will now contain all database operations because there were problems with cursors being created on different threads and this solved it (idea borrowed from team RIID)
+- setup databases to contain usernames and passwords (users table) and usernames and their blog names (blogs table)
+- add .gitignore to ignore .db files and app/__pycache__/
+
+pakL  -- 2021-1-6 22:35
+- Add logout and FruitForBlogs button
+    - logout button deletes session cookies holding username and password and leads to the login/register page
+    - FruitForBlogs button leads to the general page
+
+pakL  -- 2021-1-7 0:01
+- Add edit button in general pages that will lead to a listing of all of the user's blogs
+    - clicking on the button with a blogs name, will lead to the blog page
+
+pakL  -- 2021-1-7 12:25
+- Fix bug where apostrophes in the password, blog title, and description fields would cause the entire database to crash
+    - Made it so we don't dynamically create table and blogs table will now contain all blogs and their entries
+
+pakL -- 2021-1-7 16:04
+- Redid database structure in blogs table, and created the entries table
+- Allowed users to add new entires to their blog
+- constants.py now contains the sql code to create the three tables
+- db.py -> database.py
+    - use classes to help with cursor threads being different, closed databases
+
+yilingW -- 2021-1-7 20:14
+- Uploaded flag.jpg
+
+pakL  -- 2021-1-7 21:14
+- middleware.py, create wrapper so that each route will check if the user is logged in, if not, it redirects the route to the root
+- Allowed for users to edit their blog/entries
+- home page shows all blogs
+
+pakL  --2021-1-7 22:06
+- Finished project as detailed in design.pdf
+- Added all users to home.html
+- Removed edit options when viewing the user's own blog not under edit mode
+- Remove display pages that showed tables in users and blogs
+
+michelleT -- 2021-1-7 22:09
+- Updated design document
+    - New database table structures
+    - Updated site map to reflect actual website
+- Remove display pages to show user and blog tables
+
+-pakL  -- 2021-1-7 22:58
+- Fix bug were if you were to spam the login button, you would skip login and go to the home page
