@@ -322,3 +322,70 @@ ianC -- 2021-1-8 10:30
 	- Fixed bug from following a blog that was deleted
 	- Fixed search bug for displaying entries from deleted blogs (now deleted blogs will not show up in search)
 	- Created alternate app_remote.py that runs without debug mode and hosts the Flask on the network
+
+  -----------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------------
+  the solid guacamole era
+  -----------------------------------------------------------------------------------
+  -----------------------------------------------------------------------------------
+ guac -- 2021-1-14
+  - The beginning...
+  - Picked EL to be the PM 
+  - Picked MT's p0
+  - Picked EL's droplet
+  - Registered group in the form 
+  - Installed apache onto droplet by following https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-20-04
+  - Generated generic apache success landing page
+  - Linked submodule to RoH
+
+guac -- 2021-1-16
+  - formed a repl to house our edits
+  - began refactoring MT's p0 by following https://flask.palletsprojects.com/en/1.1.x/tutorial/layout/, got up to blueprints
+  - researched blueprints, decorators, args, kwargs, etc.
+  - picked Foundation to be our FEF
+  - set up a basic flask app that worked on apache
+  - configured wsgi and conf folders for apache on the droplet
+  - BUG: cannot get p0 to work on apache, error "Address already in use"
+
+IG, ICA -- 2021-1-17
+  - refactored login/register/blog/home routes into blueprints
+
+EL -- 2021-1-17
+  - changed droplet firewall configs to fix an ssh connection timing out error
+  - switched from working on root to joe on droplet
+  - purged apache and redid all the steps to put the working basic flask app back up, since we couldn't figure out why p0 was bugging
+  - added IG and IAC to ssh perms for droplet
+
+guac -- 2021-1-19
+  - came to a consensus to use IG and IAC's p0 instead of MT's p0 due to more people being familiar with it
+  - set up a separate repl and repo to house alternate p0
+
+IG, EL, MT -- 2021-1-19
+  - tried starting over the apache setup on the droplet again, but still couldn't figure out why the p0 was bugging
+
+IAC -- 2021-1-19
+  - figured out why p0 was not working!
+  - had to do with write/read/execute perms from apache's user, www-data, with the github repo folder we imported.
+  - also needed to specify absolute file paths instead of relative because apache has / as working dir 
+
+IG -- 2021-1-20
+  - refactored db_builder.py and app.py and templates/ by changing method calls into dictionary calls
+
+IG, IAC -- 2021-1-20
+  - refactored blog.py and auth.py for the blog and authentication related routes
+  - split app.py into __init__.py, app_remote.py, plus all of the blueprint files
+
+EL, MT -- 2021-1-20
+  - refactored follow.py and search.py for the follow and search related routes
+
+MT -- 2021-1-20
+  - got a headstart on foundation tutorials
+ 
+guac -- 2021-1-21
+  - began exploring foundation
+  - fake grimlock?
+
+EL -- 2021-1-21
+  - merged the alternate repl and repo into the main repl and repo
+  - updated README
+  - updated devlog 
