@@ -1,37 +1,47 @@
-<!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="utf-8"/>
-    </head>
-    <body>
-        <form action="/home" method="get">
-            <input type="submit" name="FruitForBlogs" value="FruitForBlogs">
-        </form>
-        <br>
-        <form action="/new-blog" method="get">
-            <input type="submit" name="new_blog" value="New Blog">
-        </form>
-        <form action="/edit" method="post">
-            <input type="submit" name="edit" value="Edit">
-        </form>
-        <form action="/logout" method="post">
-            <input type="submit" name="logout" value="Logout">
-        </form>
-        <br>
-        <br>
-        All Users:
-        {% for item in user_collection %}
-            <form action="/view-user" method="post">
-                <button name="user" value="{{ item[0] }}" type="submit">{{ item[0] }}</button>
-            </form>
-        {% endfor %}
-        <br>
-        <br>
-        All Blogs:
-        {% for item in collection %}
-            <form action="/view-blog" method="post">
-                <button name="blog" value="{{ item[0] }}" type="submit">{{ item[1] }}</button>
-            </form>
-        {% endfor %}
-    </body>
-</html>
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %}Welcome to Riidordie, {{ username }}{% endblock %}</h1>
+{% endblock %} {% block content %}
+
+<body>
+	<div id="home">
+		<div class="container">
+			<h1 class="title">Welcome to Riidordie, {{ username }}</h1>
+			{% if error_msg is defined and error_msg %}
+			<p class="error-msg">{{ error_msg }}</p>
+			{% endif %} {% if not blogs %}
+			<h3>No blogs created yet.</h3>
+			{% else %}
+			<table>
+				<thead>
+					<th>Blog Name</th>
+					<th>Blog Creator</th>
+					<th>Last Updated</th>
+					<th>Description</th>
+					<th>Following</th>
+				</thead>
+				{% for blog in blogs %}
+				<tr>
+					<td><a href="{{ url_for('blog.viewBlog', username=blog['username']) }}">{{ blog["blogname"] }}</a></td>
+					<td>{{ blog["username"] }}</td>
+					<td>{{ blog["time"] }}</td>
+					<td class="desc">{{ blog["blogdescription"] }}</td>
+					<td>
+						{% if username != blog["username"] %} {% if blog["blogname"] not in following %}
+						<form action="{{ url_for('follow.follow', username=blog['username']) }}" method="POST">
+							<input type="submit" name="home" value="Follow Blog" />
+                      </form>
+                    {% else %}
+                      <form action="{{ url_for('follow.unfollow', username=blog['username']) }}" method="POST">
+                          <input type="submit" name="home" value="Unfollow Blog" />
+                      </form>
+                    {% endif %}
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+        {% endif %}
+      </div>
+    </div>
+  </body>
+{% endblock %}

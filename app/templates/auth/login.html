@@ -1,16 +1,51 @@
+<!--
+Login page
+
+REQUIRES
+error_msg - String of why login didn't succeed, undefined if no such problem
+username  - Username
+password  - Password
+
+IMPORTS
+/static/styles.css
+
+[if user tries to log in]
+SENDS to /login by POST
+username - Username
+password - Password
+login    - Submit button
+
+[if user wants to register an account]
+SENDS to /register by GET
+-->
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="utf-8"/>
-    </head>
-    <body>
-        <p style="color:red"> {{ error }} </p>
-        <form action="{{ url_for('auth.login') }}" method="post">
-            Username: <input type="text" name="username">
-            <br>
-            Password: <input type="password" name="password">
-            <br>
-            <input type="submit" name="login" value="Login">
-        </form>
+<html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Log In - Riidordie</title>
+	<link rel="stylesheet" href="/static/styles.css" />
+</head>
+
+<body class="login">
+	<div id="login">
+		<div class="container">
+			<h1 class="title">Log In</h1>
+			{% if error_msg is defined %}
+			<p class="error-msg">{{ error_msg }}</p>
+			{% endif %}
+			<form action="{{ url_for('auth.login') }}" method="POST">
+				<label for="username">Username <span class="required">*</span></label>
+                    <input type="text" name="username" id="username" value="{{ username }}" required />
+                    <br class = "spacing"><br class = "spacing">
+                    <label for="password">Password <span class="required">*</span></label>
+                    <input type="password" name="password" id="password" value="{{ password }}" required />
+                    <br class = "spacing">
+                    <label for="submit"></label>
+                    <input name="login" type="submit" value="Log In" />
+                    <p id="link">Not a registered user? <a href="{{ url_for('auth.register') }}">Register here.</a></p>
+                </form>
+            </div>
+        </div>
     </body>
 </html>

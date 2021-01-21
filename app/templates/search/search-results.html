@@ -1,0 +1,55 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %}Search Results - Riidordie{% endblock %}</h1>
+{% endblock %} {% block content %}
+
+<body>
+	{% if entries %}
+	<div id="bloghome">
+		<div class="containers">
+			<h1>Search Results for {{ search }}</h1>
+			<nav>
+				{% for page in entries %} {% if loop.index != pageNum %}
+				<a href="{{ url_for('search.searchFunction', pageNum= loop.index) }}">Page {{loop.index}}</a>
+				{% else %}
+				<p>Page {{loop.index}}</p>
+				{% endif %} {% endfor %}
+			</nav>
+		</div>
+
+		<div class="containers entries">
+			{% for entry in entries[pageNum - 1] %}
+			<fieldset class="containers">
+				<legend><a href="{{ url_for('blog.viewBlog', username=entry['username']) }}">{{ entry["title"] }}</a></legend>
+				<p>Posted at {{ entry["time"] }} by {{ entry["username"] }}</p>
+				{% if entry["pic"] != "" %}
+				<img src="{{ entry['pic'] }}" />
+                            {% endif %}
+                            {% for line in entry["post"] %}
+                                <p>{{ line }}</p>
+                            {% endfor %}
+                        </fieldset>
+                    {% endfor %}
+                </div>
+
+                <div class="containers">
+                    <nav>
+                        {% for page in entries %}
+                            {% if loop.index != pageNum %}
+                                <a href="{{ url_for('search.searchFunction', pageNum= loop.index) }}">Page {{loop.index}}</a>
+                            {% else %}
+                                <p>Page {{loop.index}}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </nav>
+                </div>
+            </div>
+        {% else %}
+            <div id="home">
+                <div class="container">
+                    <h1>Search Results for {{ search }}</h1>
+                    <h3>No matching entries. Try different search words.</h3>
+                </div>
+            </div>
+        {% endif %}
+    </body>
+{% endblock %}

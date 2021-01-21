@@ -1,14 +1,75 @@
-<!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="utf-8"/>
-    </head>
-    <body>
-        Blogs
-        <br>
-        {% for item in collection %}
-            {{ item }}
-            <br>
-        {% endfor %}
+<!-- put this in content?? -->
+{% if pageNum is not defined %} {% set pageNum = 1 %} {% endif %} {% extends 'base.html' %} {% block header %}
+<h1>{% block title %}{{ blogname }} - Riidordie{% endblock %}</h1>
+{% endblock %} {% block content %}
+
+<body>
+	<div id="bloghome">
+		<div class="containers">
+			{% if error_msg is defined and error_msg %}
+			<p class="error-msg">{{ error_msg }}</p>
+			{% endif %}
+			<h1 class="title">{{ blogname }}</h1>
+			<p>A blog by <u>{{ creator }}</u></p>
+			<div class="text">
+				{% for line in blogdescription %}
+				<p>{{ line }}</p>
+				{% endfor %}
+			</div>
+			{% if not iscreator %} {% if following %}
+			<form action="{{ url_for('follow.unfollow', username=creator) }}" method="POST">
+				<input type="submit" name="viewBlog" value="Unfollow Blog">
+                        </form>
+                    {% else %}
+                        <form action="{{ url_for('follow.follow', username=creator) }}" method="POST">
+                            <input type="submit" name="viewBlog" value="Follow Blog">
+                        </form>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <div class="containers">
+                {% if not entries %}
+                    <h3>No entries posted yet.</h3>
+                {% else %}
+                <nav>
+                    {% for page in entries %}
+                        {% if loop.index != pageNum %}
+                            <a href="{{ url_for('blog.viewBlog', username=creator, pageNum=loop.index) }}">Page {{loop.index}}</a>
+                        {% else %}
+                            <p>Page {{loop.index}}</p>
+                        {% endif %}
+                    {% endfor %}
+                </nav>
+            </div>
+
+            <div class="containers entries">
+                {% for entry in entries[pageNum - 1] %}
+                    <fieldset class="containers">
+                        <legend>{{ entry["title"] }}</legend>
+                        <p>Posted at {{ entry["time"] }}</p>
+                        {% if entry["pic"] != "" %}
+                            <img src="{{ entry['pic'] }}" />
+                        {% endif %}
+                        {% for line in entry["post"] %}
+                            <p>{{ line }}</p>
+                        {% endfor %}
+                    </fieldset>
+                {% endfor %}
+            </div>
+
+            <div class="containers">
+                <nav>
+                    {% for page in entries %}
+                        {% if loop.index != pageNum %}
+                            <a href="{{ url_for('blog.viewBlog', username=creator, pageNum=loop.index) }}">Page {{loop.index}}</a>
+                        {% else %}
+                            <p>Page {{loop.index}}</p>
+                        {% endif %}
+                    {% endfor %}
+                </nav>
+                {% endif %}
+            </div>
+        </div>
     </body>
-</html>
+{% endblock %}

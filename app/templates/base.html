@@ -1,0 +1,34 @@
+{% if pageNum is not defined %}
+    {% set pageNum = 1 %}
+{% endif %}
+<!doctype html>
+<title>{% block title %}{% endblock %}</title>
+<link rel="stylesheet" href="/static/styles.css" />
+<!-- **** Add if g.user, header visible, else not visible -->
+<nav>
+	<div id="header">
+		<div id="left">
+			<a id="home" href="{{ url_for('blog.homepage') }}">Home</a>
+			<a id="edit" href="{{ url_for('blog.editBlog') }}">Edit My Blog</a>
+			<a id="follow" href="{{ url_for('follow.followedBlogs') }}">Followed Blogs</a>
+		</div>
+		<div id="center">
+			<form action="{{ url_for('search.searchFunction') }}" method="POST">
+				<input type="text" name="keywords" id="keywords" placeholder="Enter search terms" required />
+              <input name="search" id="search" type="submit" value="Search"/>
+          </form>
+      </div>
+      <div id="right">
+          <a id="logout" href="{{ url_for('auth.logout') }}">Log Out, {{ username }}</a>
+      </div>
+  </div>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>

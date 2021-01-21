@@ -1,70 +1,324 @@
-michelleT  -- 2020-12-17 21:30
-Made base files with teammates, worked on design.pdf, updated README to include basic starting information.
+TEAM RIID DEVLOG
 
-michelleT  -- 2020-12-21 20:58
-Made new design document for scenario two, added to repository, updated README with up-to-date information
+RIID -- 2020-12-17 16:02
+	- Finished the design doc
+	- Started the devlog
 
-pakL  -- 2021-1-6 10:13
-- Created four templates
-    - general.html -> general blog page (what the user sees first if they are already logged in)
-    - login_or_register.html -> page that allows you to go to the login or the register page (what the user sees first if they are not logged in)
-    - login.html -> login page
-    - register.html -> register page
-- Updated __init__.py
-    - root() redirects the user to general.html or login_or_register.html depending on login status
-    - register() will handle registration
-    - credentialsWork() will return whether session credentials are in the database and work
+RIID -- 2020-12-18 16:00s
+	- Redid the design doc
+	- Updated README.md
 
-pakL  -- 2021-1-6 22:17
-- Finished login and registration
-    - login and registration pages have their own errors for when there is nothing inputted
-    - login page has errors for incorrect credentials
-    - registration page have errors for mismatching passwords, user already existing, and when there is non-alphanumeric characters in the username
-    - registration page leads to a successful registration page that has a button leading to the login page
-    - after a successful login, the pages lead to the general page
-- db.py will now contain all database operations because there were problems with cursors being created on different threads and this solved it (idea borrowed from team RIID)
-- setup databases to contain usernames and passwords (users table) and usernames and their blog names (blogs table)
-- add .gitignore to ignore .db files and app/__pycache__/
+ianC -- 2020-12-18 19:50
+	- Added HTML Templates (blog.html, edit-blog.html, edit-entry.html, header.html, home.html, login.html,
+				register.html)
 
-pakL  -- 2021-1-6 22:35
-- Add logout and FruitForBlogs button
-    - logout button deletes session cookies holding username and password and leads to the login/register page
-    - FruitForBlogs button leads to the general page
+reneeM -- 2020-12-19 16:40
+	- Added db_bulider.py with lines to create the users and entries tables in the database
+	- Added methods to add user to database and check if username has already been used
+	- Added method to print rows in user table
 
-pakL  -- 2021-1-7 0:01
-- Add edit button in general pages that will lead to a listing of all of the user's blogs
-    - clicking on the button with a blogs name, will lead to the blog page
+ianC -- 2020-12-19 17:30
+	- Updated register.html to support multiple error messages.
 
-pakL  -- 2021-1-7 12:25
-- Fix bug where apostrophes in the password, blog title, and description fields would cause the entire database to crash
-    - Made it so we don't dynamically create table and blogs table will now contain all blogs and their entries
+ishitaG -- 2020-12-19 17:32
+	- Added @app.routes for /register and /registered
+	- Added verification for registration form
+		- Checks to make sure no field is blank and that passwords match
+		- To-do: add Renee's method for checking if username already exists in database
+	- Added method to send new user information to database
+		- Bug: received SQLite thread error -- need to fix
 
-pakL -- 2021-1-7 16:04
-- Redid database structure in blogs table, and created the entries table
-- Allowed users to add new entires to their blog
-- constants.py now contains the sql code to create the three tables
-- db.py -> database.py
-    - use classes to help with cursor threads being different, closed databases
+reneeM -- 2020-12-19 19:26
+	- Fixed SQLite thread error by opening and closing database in every method instead of just doing
+		it once at the start of the db_builder file
 
-yilingW -- 2021-1-7 20:14
-- Uploaded flag.jpg
+ishitaG -- 2020-12-19 19:57
+	- Integrated method to check for duplicate usernames
+	- Integrated solution for SQLite thread error
+	- Added linkage to login page after user registers successfully
 
-pakL  -- 2021-1-7 21:14
-- middleware.py, create wrapper so that each route will check if the user is logged in, if not, it redirects the route to the root
-- Allowed for users to edit their blog/entries
-- home page shows all blogs
+ianC -- 2020-12-22 14:52
+	- Updated login.html to support username and password being filled in automatically
 
-pakL  --2021-1-7 22:06
-- Finished project as detailed in design.pdf
-- Added all users to home.html
-- Removed edit options when viewing the user's own blog not under edit mode
-- Remove display pages that showed tables in users and blogs
+reneeM -- 2020-12-22 14:55
+	- Added methods to find password when given a username and to clear the users table
 
-michelleT -- 2021-1-7 22:09
-- Updated design document
-    - New database table structures
-    - Updated site map to reflect actual website
-- Remove display pages to show user and blog tables
+ishitaG -- 2020-12-22 16:02
+	- Reroute newly registered user to login page with username/password already filled out
+	- Add login functionality
+		- If incorrect login, reload page with error message
+		- If user logged in previously, store information in session and load filled out login page
+		- If user successfully logs in, redirect to home page
 
--pakL  -- 2021-1-7 22:58
-- Fix bug were if you were to spam the login button, you would skip login and go to the home page
+ishitaG -- 2020-12-23 11:12
+	- Add logout functionality
+		- Remove username/password from session
+		- Update login.html to support logout message
+	- Allow logged in users to access logout and edit-my-blog buttons
+	- Redirect users who try to access pages they don't have permission for
+		- redirect for /registered not working
+
+reneeM -- 2020-12-23 14:24
+	- Changed method to find password to be able to find blog name and description too
+	- Added methods to update blog information and get a list of blog names
+
+ishitaG -- 2020-12-23 15:36
+	- Refactor /register and /registered app routes so that one method handles everything
+		- In register.html, change form action to /register to support refactoring
+		- Fix redirect for registering
+	- Add ability for user to update the name/description of their blog
+		- Loads form with blog name/description filled out
+		- If user submits form with blank name, reload page with original name, new description, error msg
+		- If no error, update database and show success message
+			- To-do: wait for 1 second then redirect to edit-entry or view-blog page
+	- Remove data.db from .gitignore
+
+reneeM -- 2020-12-23 18:53
+	- Change getBlogs method to return a dictionary with information on the blogs
+
+ishitaG -- 2020-12-23 20:05
+	- Add method to allow users to see all blogs
+		- If blog is user's own, allow user option to edit it
+		- Ending of url when a blog is clicked on is user's name
+	- When user updates blog name/description, redirect to view-blog page for user
+		- Unable to display success msg and do this (cannot return two templates)
+	- Modify templates to support code (url endings, key names)
+	- Remove unnecessary test cases from db_builder.py
+
+ianC -- 2020-12-24 12:31
+	- Added 404.html template
+	- Added form to add entry and improved GUI on edit-blog.html
+
+dragosL -- 2020-12-24 13:57
+	- Added addEntry to db_builder
+
+dragosL -- 2020-12-24 15:23
+	- Added editEntry and getEntries to db_builder
+
+dragosL -- 2020-12-24 16:24
+	- Added ability to order lines in the users
+
+ishitaG -- 2020-12-24 16:31
+	- Users are able to update blog name/description, add entries, and edit entries on the same page
+	- Entries are listed in chronological order, with newest entry at the top (when both viewing and editing blogs)
+	- When user add entries:
+		- Page is reloaded with that entry at the top
+		- If entry title or post is blank, reload page with error message
+	- When users edit entries:
+		- Page is reloaded with that entry at the top
+		- If entry title or post is blank, reload page with original values and display error message
+	- Modified templates
+		- Changing urls to fit page roles
+		- Updating jinja to support code
+		- Adding names to forms to distinguish which form is submitted (mostly for pages with multiple forms)
+	- Redirect user from all pages if user not logged in
+
+ishitaG -- 2020-12-24 19:58
+	- If logged in user goes to login page, redirect to home page
+	- Fixed bug: login page reloaded upon user entering incorrect info instead of displaying error msg
+
+ishitaG -- 2020-12-24 22:58
+	- If user, logged in or not, tries to access page that doesn't exist, redirect to 404 error page
+	- Modify templates so logout button is visible to logged in users
+	- Fixed bug: if user submits empty registration form then goes to login page,
+	  werkzeug.exceptions.BadRequestKeyError occured
+	- Edit home.html so that username is displayed in a greeting
+
+ishitaG -- 2020-12-25 00:55
+	- Redirect logged in user trying to access register page to home page
+	- Fixed bug: updating blog info resulted in error because page tries to autofill add
+	  entry info even if form is not submitted
+
+ianC -- 2020-12-30 16:26
+	- Added *'s to required fields
+	- Added requirements for valid usernames and passwords
+	- Updated comments on HTML templates
+	- Implemented SQL parameterization
+	- Added support for new lines in entry content and blog descriptions
+	- Added password hashing and hashed all passwords in existing users
+
+ishitaG -- 2021-1-1 21:21
+	- Fixed bug: if user submitted an unsuccessful registration form, then went to login page,
+	  werkzeug.exceptions.BadRequestKeyError occured
+		- Normally, if user regs, their info is autofilled in login page, but if there is an error, there is no info
+	- Bug to fix: existing users with passwords less than 8 characters long are unable to log in
+
+dragosL -- 2021-1-2 14:00
+	- Added delete entries function
+
+ishitaG -- 2021-1-2 14:21
+	- Add delete entry functionality for user
+		- Edit template to support, add flask routes
+	- Create template to support search function
+		- Add search form to homepage
+
+dragosL -- 2021-1-2 15:41
+	- Added get info about entries function
+	- Added search function
+	- Fixed issue with delete entries
+
+dragosL -- 2021-1-2 15:49
+	- Fixed issue with get info from entries
+	- Added get username from user id function
+
+ishitaG -- 2021-1-2 16:05
+	- Add search functionality
+		- If user submits enters blank search, reload page
+		- If user has multiple keywords, entries must contain all words
+			- When form is submitted, load results page with all entries
+			- Entry titles are links that user can click on to go to that blog
+
+ianC -- 2021-1-2 16:12
+	- Add confirmation to delete entry
+
+ishitaG -- 2021-1-2 1:10
+	- Modified edit-blog template so edit and delete entry are next to each other
+	- Bug to fix: if logged in user goes to search-results url without searching,
+	  they are redirected to login page (filled in)
+
+ishitaG -- 2021-1-3 18:08
+	- Fixed bug: when editing entries, user could change url to go to non-existent entry
+	  (would display blank blogname/desc, and adding entry worked)
+	- Fixed bug: if logged in user goes to search-results url without searching,
+	  they are redirected to login page (filled in)
+	- Bug to fix: add-entry and edit-entry should redirect to edit-blog url
+	  currently, the edit-blog template is rendered, but url changes
+
+reneeM -- 2021-1-4 10:25
+	- Added followers table and methods to add/remove followers
+	- Added methods to check if followers exist and to return all users a user is following
+
+ianC -- 2021-1-4 10:45
+	- Added page view for entries in both viewing and editing blogs
+	- Added buttons to follow blogs (from both the home page and the view blog page)
+
+reneeM -- 2021-1-4 11:11
+	- Fixed getFollowedUsers method to return usernames instead of userIDs
+
+ishitaG -- 2021-1-4 13:20
+	- Fixed bug: if user submits blank login form, then blank reg form, login page gave error
+	- Added HTML template for followed blogs page
+	- Added flask methods for following and unfollowing blogs
+		- If user attempts to follow blog they are already following (via url), give msg
+		- If user attempts to unfollow blog they are not following (via url), give msg
+
+ishitaG -- 2021-1-4 14:08
+	- Users can follow/unfollow blogs from the home page and from individual blog pages
+	- Bug to fix: On home page, button only says follow, even if already following blog
+		- However, msg works correctly -- says already following/successfully followed
+
+ishitaG -- 2021-1-4 14:28
+	- Fixed bug from previous push. Home page correctly displays follow/unfollow buttons
+
+reneeM -- 2021-1-4 14:43
+	- Changed getFollowedUsers() to getFollowedBlogs()
+	- It now returns a list of dictionaries of blogs a user is following
+	- Added column in entries tables to store an image address and adjusted related methods
+
+ianC -- 2021-1-4 15:00
+	- Added single-image-per-entry functionality to editing and viewing blogs.
+
+ishitaG -- 2021-1-4 15:42
+	- Refactor code to include add/edit/delete code in edit blog method 
+		- all three actios redirect user back to edit-blog url
+	- Add ability for user to include images in their blog entries
+
+ishitaG -- 2021-1-4 18:21
+	- Fixed bug: messages were not displaying when entries where edited
+	- User unable to update entry without any edits
+	- Fixed bug: if user jumped back and forth between login and registration forms, error occured
+	- Updated CSS
+
+ishitaG -- 2021-1-4 22:07
+	- Updated CSS
+	- Updated HTML templates
+		- Moved around some things for more consistent organization
+		- If no search results, display message 
+		- If no followed blogs, display message
+		- To-do: If no created entries, display message
+	- Add ability for user to preview their edited blog
+	- Added error_msgs to templates that were missing 
+	- Added ability for users to unfollow blogs from anywhere
+		- If user follows/unfollows from home page, page is reloaded with msg
+		- If user follows/unfollows from blog page, page is reloaded with msg
+		- If user unfollows from followed blog page, page is reloaded with msg
+
+ianC -- 2021-1-5 15:00
+	- Added CSS to home.html, login.html, register.html, header.html
+	- Updated comments in HTML templates home.html, login.html, register.html
+	- Reorganized HTML in header.html, home.html, login.html, register.html
+	- Created header for all pages
+	- Added HTML validation for all applicable fields (header.html, home.html, login.html, register.html)
+
+ishitaG -- 2021-1-5 15:30
+	- Updated css for all pages and condensed to one file
+	- Added comments to css
+
+ianC -- 2021-1-5 20:00
+	- Fixed error_msg related bug when logging in
+	- Fixed a jinja logic error involving rendering entries
+	- Fixed CSS issue due to conflicting ids
+	- Fixed wrong username being rendered in jinja
+	- Made it so user has to be logged-in to view 404 page
+	- Added CSS to 404.html, blog.html, edit-blog.html, follow-blog.html, search-results.html
+	- Fixed comments on 404.html, blog.html, follow-blog.html
+
+ishitaG -- 2021-1-5 21:48
+	- Found and fixed small bugs in css
+	- Bug to fix: user can enter just spaces as blog name/desc etc 
+		- No hyperlink/etc shows up
+
+ishitaG -- 2021-1-6 11:00
+	- Tested site while removing stylesheet 
+		- Modified login and register pages to be more organized without css
+	- Fixed bug: user couldn't add numbers in username
+
+ianC -- 2021-1-6 13:07
+	- Made sure app.py and db_builder.py complied to PEP8 standards
+	- Refactored app.py to use validateInput to validate inputs
+	- Implemented character limits in app.py and in HTML templates
+	- Fixed consistency issue with margins on search-results, follow-blog, and home
+	- Sanitized inputs for search
+	- Added page-view and showing username on search-results
+	- Fixed text overflowing in tables and blog pages
+	- Added error message animation
+
+ishitaG -- 2021-1-6 13:21
+	- Updated CSS	
+		- Changed color scheme
+	- Removed ... labels attached to submit button
+	- Modified templates so that they were properly organized when CSS is removed 
+	- Fixed some minor bugs
+
+RIID -- 2021-1-6 15:31
+	- Updated design doc
+
+ishitaG -- 2021-1-6 15:31
+	- Added team flag
+	
+reneeM -- 2021-1-6 15:32
+	- Added requirements.txt and update README with launch codes and roster
+
+ishitaG, ianC -- 2021-1-7 15:25
+	- Added master password that allows admins to log into any account
+
+ishitaG -- 2021-1-7 16:45
+	- Small fix for html templates without css
+
+ianC -- 2021-1-7 17:00
+	- Added function to delete specific users
+	- Fixed issue where user could resize textarea past width of container
+	- Mostly fixed searching "%" symbols
+	- Added searching by title and content
+
+ianC -- 2021-1-8 1:30
+	- Fixed word-wrap appearance across website
+	- Finished commenting HTML templates and CSS
+	- Made sure indents were consistent in devlog
+	- Fixed search bug for fetching usernames when the entry's creator was deleted
+	- Added handling for pageNums of less than 1
+
+ianC -- 2021-1-8 10:30
+	- Fixed bug from following a blog that was deleted
+	- Fixed search bug for displaying entries from deleted blogs (now deleted blogs will not show up in search)
+	- Created alternate app_remote.py that runs without debug mode and hosts the Flask on the network

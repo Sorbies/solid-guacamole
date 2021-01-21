@@ -1,0 +1,14 @@
+{% extends 'base.html' %} {% block header %}
+<h1>{% block title %}404 Error - Riidordie{% endblock %}</h1>
+{% endblock %} {% block content %}
+
+<body>
+	<div id="home">
+		<div class="container">
+			<h1 class="title">404 Error (Whoops)</h1>
+			<p>Page not found</p>
+			<a href="{{ url_for('blog.homepage') }}">Back to home</a>
+		</div>
+	</div>
+</body>
+{% endblock %}
