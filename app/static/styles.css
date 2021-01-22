@@ -1,485 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&display=swap');
-
-html, body {
-    margin: 0;
-    padding: 0;
-    min-width: 100%;
-    min-height: 100%;
-    font-family: 'Roboto Condensed', sans-serif;
-    display: flex;
+/* LOGIN/REGISTRATION PAGE */
+.grid-container fluid {
+    margin: 0px;
 }
 
-body {
-    background-color: #E0C7FDB0;
-    display: flex;
-    flex: 1 1 auto;
-    flex-direction: column;
-    align-items: stretch;
-    overflow-wrap: anywhere;
-    word-wrap: anywhere;
-}
-
-/* Remove br's in place as fallback without CSS */
-br {
-    display: none;
-}
-
-/* || Typography Rules */
-p {
-    font-weight: 300;
-}
-
-h1, h2 {
-    font-weight: 700;
-}
-
-a {
-    color: #501785;
-}
-
-.title {
-    font-size: 35px;
-    margin-top: 0px;
-}
-
-.text {
-    border: 3px dashed grey;
-    font-size: 90%;
-}
-
-div.text {
-    width: 80%;
-    padding: 0.25em 1em;
-    margin: 1em 0;
-}
-
-span.required {
-    color: #6C33A6;
-}
-
-/* Error message at top of page */
-.error-msg {
-    background-color: #D9B4FD;
-    border-color: #000000;
-    border-style: ridge;
-    border-width: 3px;
-    border-radius: 5px;
-    padding: 3px;
-    font-weight: bold;
-    width: calc(100% - 12px);
-    animation-name: disappearing_msg;
-    animation-duration: 2s;
-    transition-timing-function: linear;
-    animation-fill-mode: forwards;
-    animation-iteration-count: 1;
-    animation-direction: normal;
-    opacity: 1;
-}
-
-/* Animation to make error message disappear */
-@keyframes disappearing_msg {
-    0% {
-        opacity: 1;
-        position: static;
-        width: auto;
-        height: auto;
-    }
-
-    50% {
-        opacity: .8;
-    }
-
-    80% {
-        opacity: .5;
-        position: static;
-    }
-
-    99% {
-        opacity: 0;
-        width: auto;
-        height: auto;
-    }
-
-    100% {
-        opacity: 0;
-        position: absolute;
-        width: 0;
-        height: 0;
-        z-index: -99999999;
-    }
-}
-
-/* Navigation bar for entry pages */
-nav a, nav p {
-    float: left;
-    margin: 0 10px 0 0;
-    display: flex;
-    text-decoration: underline;
-}
-
-nav {
-    width: 100%;
-    display: flex;
-    margin: 10px 0;
-}
-
-/* Fieldsets for displaying entries */
-fieldset {
-    margin: 10px 0;
-    border: 3px solid grey;
-}
-
-/* Entry title */
-fieldset legend {
-    background-color: #CFC3F8;
-    border: 3px solid grey;
-    padding: 3px;
-}
-
-/* Entry time (and creator) */
-fieldset > p:first-of-type {
-    padding: 3px;
-    text-decoration: underline;
-}
-
-/* Link to entry from title */
-fieldset a {
-    color: #000000;
-}
-
-/************** HEADER  *****************/
-
-/* Overall Header */
-#header {
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-    align-items: stretch;
-    background-color: #29088D;
-    height: 50px;
-    width: 100%;
-    position: sticky;
-    font-size: 20px;
-    top: 0;
-    z-index: 999999999;
-}
-
-/* Split into left/right/center but still overall */
-#header div {
-    align-self: center;
-    flex-grow: 1;
-    display: flex;
-}
-
-/* All the links */
-#header a {
-    display: block;
-    color: white;
-    padding: 13px 10px;
-    align-self: center;
-}
-
-/* Hover over link */
-#header a:hover {
-    background-color: #023E8A;
-}
-
-/* Title is not a link */
-#header p {
-    display: block;
-    color: white;
-    padding: 10px 10px;
-    align-self: center;
-    justify-content: flex-start;
-}
-
-/* Website name and links */
-#header #left {
-    flex-grow: 1;
-}
-
-/* Search form */
-#header #center {
-    flex-grow: 8;
-    text-align: center;
-}
-
-/* Entire search form */
-#header form {
-    width: 100%;
-    display: flex;
-}
-
-/* Placeholder text inside search bar */
-#header input {
-    font-size: 20px;
-    float: left;
-}
-
-/* User input in search bar */
-#header #keywords {
-    flex: 100 0 auto;
-    margin-right: 5px;
-}
-
-/* Search button */
-#header #search {
-    flex: 1 0 auto;
-    font-weight: 700;
-}
-
-/* Logout button */
-#header #right {
-    float: right;
-    text-align: right;
-    justify-content: flex-end;
-    padding-right: 5px;
-}
-
-/************** HOME  *****************/
-
-/* Container for main content */
-body > #home .container {
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 1500px;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-/* Container for main content and also containers to split up content */
-.container, .containers {
-    background-color: #B295FF;
-    padding: 20px;
-    font-size: 20px;
-}
-
-/* Make container fill body */
-.container {
-    flex: 1 1 auto;
-}
-
-/* Select entry images and limit their size */
-.containers img {
-    max-width: 100%;
-    max-height: 90vh;
-}
-
-/* || Table */
-
-table {
-    border-collapse: collapse;
-    font-size: 20px;
-    width: 100%;
-    text-align: center;
-}
-
-/* Table header */
-thead, th {
-    background-color: #02033A;
-    color: white;
-    font-weight: 300;
-    word-wrap: normal;
-    overflow-wrap: normal;
-    word-break: normal;
-}
-
-/* Table rows and cells */
-tr{
-    border-top: 1px solid black;
-}
-
-td {
-    width: 20px;
-}
-
-/* Alternate rows of table */
-tr:nth-child(odd) {
-    background-color: #C5BDFA;
-    color: black;
-}
-
-tr:nth-child(even) {
-    background-color: #F7DEFD;
-    color: black;
-}
-
-/* Input elements in table -- follow/unfollow buttons */
-table input {
-    background-color: #FFFFFF;
-}
-
-
-/* || Input Fields (styling and animations) */
-
-input::placeholder {
-    font-family: 'Roboto Condensed', sans-serif;
-}
-
-input, textarea {
-    font-family: inherit;
-    font-size: inherit;
-    border-style: solid;
-    border-color: grey;
-    outline-color: grey;
-    outline-width: 3px;
-    border-width: 3px;
-    transition-duration: 0.5s;
-    transition-property: border-color, outline-color;
-    transition-timing-function: linear;
-	max-width: 100%;
-}
-
-input:focus, textarea:focus {
-    outline-color: white;
-}
-
-input:valid, textarea:valid {
-    outline-color: green;
-}
-
-input:invalid, textarea:invalid {
-    outline-color: red;
-}
-
-
-input[type="submit"] {
-    transition-property: filter;
-    transition-duration: 0.2s;
-    filter: brightness(100%);
-    cursor: pointer;
-}
-
-input[type="submit"]:hover {
-    filter: brightness(90%);
-}
-
-/************** LOGIN  *****************/
-.login {
-    background-image: url("https://64.media.tumblr.com/61aab7c9150371daf454d9c7d45b7c35/tumblr_obclnoe4iA1vc76nvo1_1280.jpg");
-    background-repeat: no-repeat;
-    background-position: right bottom;
+.hero-section {
+    background: url("https://api.time.com/wp-content/uploads/2018/08/gettyimages-619399572.jpg?quality=85&w=1024&h=512&crop=1") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
     background-size: cover;
-    margin: 0;
-    padding: 0;
-}
-
-#login {
-    display: flex;
-    flex-direction: column;
-    flex: 1 1 auto;
-    padding: 0;
-    margin: 0;
-}
-
-/* Main container for login form */
-#login .container {
-    width: clamp(400px, 33%, 600px);
-    border-right: 6px solid #7b2cbf;
-    font-size: 20px;
-    background-color: #877EFFC4;
     height: 100%;
-    margin: 0;
-    padding-top: 10px;
-}
-
-#login input, #login textarea, .loginForm input, .loginForm textarea {
-    font-size: 20px;
-    margin-bottom: 25px;
-    margin-top: 5px;
-    display: block;
-    width: 80%;
-}
-
-#login input[type="submit"], .loginForm input[type="submit"] {
-    width: 50%;
-}
-
-#login small, .loginForm small {
-    color: #555555;
-}
-
-#login label, .loginForm label {
     width: 100%;
-    display: block;
+    text-align: right;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
 }
 
-#login label[for="submit"], .loginForm label[for="submit"] {
-    opacity: 0;
+.hero-section .hero-section-text {
+    color: #014b19;
+    text-shadow: 1px 1px 2px #0a0a0a;
 }
 
-#login textarea, .loginForm textarea {
-    width: 80%;
-    min-height: 90px;
+
+
+/* LOGIN/REGISTRATION FORM */
+.translucent-form-overlay {
+    text-align: left;
+    max-width: 500px;
+    width: 100%;
+    background-color: rgba(54, 54, 54, 0.8);
+    padding: 20px;
+    color: #fefefe;
 }
 
-/* Link to login/register page at bottom of register/login form */
-#login #link, .loginForm #link {
-    font-size: 100%;
-    margin-top: -20px;
+.translucent-form-overlay .columns.row {
+    display: block; 
 }
 
-/* Delete entry button on edit-entry forms */
-.loginForm details {
-    margin-top: -10px;
+.translucent-form-overlay h1 {
+    text-align: center;
 }
 
-/************** BLOG  *****************/
-body > #bloghome {
-    /* display: flex;
-    flex: 1 1 auto; */
-    display: block;
+.translucent-form-overlay h3, .translucent-form-overlay label {
+    color: #fefefe;
 }
 
-/* Select containers -- blog metadata, add entry form, individual entries, the .entries container for entries */
-body > #bloghome .containers {
-    width: 80%;
-    margin: 20px auto;
-    max-width: 1500px;
+.translucent-form-overlay input, .translucent-form-overlay select {
+    color: #8a8a8a;
 }
 
-/* Container for a page of entries */
-body > #bloghome .entries {
-    background: transparent;
-    width: calc(80%);
-    margin: -20px auto;
-    border-left: 50px solid #B295FF;
-    z-index: 0;
-    transform: translateX(25px);
+.translucent-form-overlay input::-webkit-input-placeholder {
+    color: #8a8a8a;
 }
 
-/* Selects the entries inside the .entries container */
-.entries .containers {
-    width: calc(90%);
-    max-width: calc(90%);
-    z-index: 0;
-    transform: translateX(-25px);
+.translucent-form-overlay input:-ms-input-placeholder {
+    color: #8a8a8a;
 }
 
-/* Responsive design for mobile devices */
-@media (max-width: 800px) {
-    /* Place the three parts of the header vertically */
-    #header {
-        height: auto;
-        flex-direction: column;
-    }
-
-    /* Get rid of the horizontal margins and borders surrounding containers */
-    .container, .containers {
-        width: auto !important;
-        display: block !important;
-        margin-left: 0 !important;
-        margin-right: 0 !important;
-        transform: none !important;
-    }
-    .entries {
-        width: auto !important;
-        margin: 0 !important;
-        padding: 0 !important;
-        border: none !important;
-        transform: none !important;
-    }
-
+.translucent-form-overlay input::placeholder {
+    color: #8a8a8a;
 }
+

@@ -72,3 +72,4 @@ IG, MT, EL -- 2021-1-21
   - BUG: sometimes refreshing the website leads to an internal server error, 
     may be a database issue. Also the routing with login/register is a little
     wonky.
+  - Installed Foundation on our local computers 
