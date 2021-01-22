@@ -29,10 +29,9 @@ IG, ICA -- 2021-1-17
   - refactored login/register/blog/home routes into blueprints
 
 EL -- 2021-1-17
-  - changed droplet firewall configs to fix an ssh connection timing out error
+  - changed droplet firewall configs to fix an ssh connection timing out error, added IG and IAC to ssh perms for droplet
   - switched from working on root to joe on droplet
   - purged apache and redid all the steps to put the working basic flask app back up, since we couldn't figure out why p0 was bugging
-  - added IG and IAC to ssh perms for droplet
 
 guac -- 2021-1-19
   - came to a consensus to use IG and IAC's p0 instead of MT's p0 due to more people being familiar with it
@@ -47,17 +46,18 @@ IAC -- 2021-1-19
   - also needed to specify absolute file paths instead of relative because apache has / as working dir 
 
 IG -- 2021-1-20
-  - refactored db_builder.py and app.py and templates/ by changing method calls into dictionary calls
+  - refactored db_builder.py by organizing methods and changing method calls into dictionary calls
+  - refactored app.py to match new db_builder
+  - turned header.html into a base template, and edited all other templates so they extended base.hyml
 
 IG, IAC -- 2021-1-20
+  - split app.py into __init__.py, blog.py, auth.py, search.py, and follow.py
+  - registered blueprints and created login required wrapper
+    - replaced redirecting users with wrapper
   - refactored blog.py and auth.py for the blog and authentication related routes
-  - split app.py into __init__.py, app_remote.py, plus all of the blueprint files
 
 EL, MT -- 2021-1-20
   - refactored follow.py and search.py for the follow and search related routes
-
-MT -- 2021-1-20
-  - got a headstart on foundation tutorials
  
 guac -- 2021-1-21
   - began exploring foundation
@@ -73,3 +73,9 @@ IG, MT, EL -- 2021-1-21
     may be a database issue. Also the routing with login/register is a little
     wonky.
   - Installed Foundation on our local computers 
+
+IG -- 2021-1-21
+  - Added CDN sheets to templates
+  - Styled the registration page
+  - BUG: after a while running the app let to "OCError: [Errno 98] Address already in use
+  - Styling to-do: get header and form inline, remove margins
