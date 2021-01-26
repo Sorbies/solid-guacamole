@@ -1,11 +1,10 @@
 {% extends 'base.html' %} {% block header %}
-<h1>{% block title %}Followed Blogs - Riidordie{% endblock %}</h1>
+<h1>{% block title %}Blogs You Are Following - Riidordie{% endblock %}</h1>
 {% endblock %} {% block content %}
 
-<body>
+<body class="allpages">
 	<div id="home">
 		<div class="container">
-			<h1 class="title">Blogs You Are Following</h1>
 			{% if error_msg is defined and error_msg %}
 			<p class="error-msg">{{ error_msg }}</p>
 			{% endif %} {% if not blogs %}
@@ -27,7 +26,7 @@
 					<td>{{ blog["blogdescription"] }}</td>
 					<td>
 						<form action="{{ url_for('follow.unfollow', username=blog['username']) }}" method="POST">
-							<input type="submit" name="followUnfollow" value="Unfollow Blog" />
+							<input type="submit" class="hollow button alert" name="followUnfollow" id="unfollow" value="Unfollow Blog" />
                                     </form>
                                 </td>
                             </tr>

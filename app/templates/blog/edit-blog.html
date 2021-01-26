@@ -1,63 +1,64 @@
 {% extends 'base.html' %} {% block header %}
-<h1>{% block title %}Editing {{ blogname }} - Riidordie{% endblock %}</h1>
+<h1>{% block title %}Editing {{ blogname }} - SG{% endblock %}</h1>
 {% endblock %} {% block content %}
 
-<body>
+<body class="allpages">
 	<div id="bloghome">
-		<div class="containers">
-			{% if error_msg is defined and error_msg %}
-			<p class="error-msg">{{ error_msg }}</p>
-			{% endif %}
-			<h1 class="title">Edit Blog Metadata</h1>
-			<a href="{{ url_for('blog.viewBlog', username=username) }}">View Blog</a></p>
-			<form class="loginForm" action="{{ url_for('blog.editBlog') }}" method="POST">
-				<label for="blogname">Blog Name <span class="required">*</span></label>
-                    <br class = "spacing" />
-                    <small>May not exceed 100 characters.</small>
+
+		<div class="grid-x fluid stacked-for-medium" id="stylemepls">
+			<div class="containers cell medium-5">
+				{% if error_msg is defined and error_msg %}
+				<p class="error-msg">{{ error_msg }}</p>
+				{% endif %}
+				<h1 class="title">Edit Blog Metadata</h1>
+				<a href="{{ url_for('blog.viewBlog', username=username) }}">View Blog</a></p>
+				<form class="loginForm" action="{{ url_for('blog.editBlog') }}" method="POST">
+					<label for="blogname">Blog Name <span class="required">*</span></label>
                     <input type="text" name="blogname" id="blogname" value="{{ blogname }}" required maxlength="100" />
+                    <small class="help-text">May not exceed 100 characters.</small>
                     <br class = "spacing" />
 
                     <label for="blogdescription">Blog Description</label>
-                    <br class = "spacing" />
-                    <small>May not exceed 250 characters</small>
                     <textarea name="blogdescription" id="blogdescription" maxlength="250">{{ blogdescription }}</textarea></td></tr>
+                    <small class="help-text">May not exceed 250 characters</small>
                     <br class = "spacing" />
 
                     <label for="submit"></label>
-                    <input name="blog" type="submit" value="Update Blog Name and Description" />
+                    <input name="blog" type="submit" class="editbutton" value="Update Blog Name and Description" />
                 </form>
             </div>
 
-            <div class="containers">
-                <h1 class="title">Add Entry</h1>
-                <form class="loginForm" action="{{ url_for('blog.editBlog') }}" method="POST">
-                    <label for="title1">Entry Title <span class="required">*</span></label>
-                    <br class = "spacing" />
-                    <small>May not exceed 100 characters.</small>
-                    <input type="text" name="title" id="title1" value="{{ entrytitle }}" required maxlength="100" />
-                    <br class = "spacing" />
+        <div class="containers cell medium-5 medium-offset-2">
+            <h1 class="title">Add Entry</h1>
+            <form class="loginForm" action="{{ url_for('blog.editBlog') }}" method="POST">
+                <label for="title1">Entry Title <span class="required">*</span></label>
+                <input type="text" name="title" id="title1" value="{{ entrytitle }}" required maxlength="100" />
+                <small class="help-text">May not exceed 100 characters.</small>
+                <br class = "spacing" />
 
-                    <label for="pic1">Image URL</label>
-                    <input type="url" name="pic" id="pic1" />
-                    <br class = "spacing" />
-                    <label for="content1">Entry Content <span class="required">*</span></label>
-                    <br class = "spacing" />
-                    <small>May not exceed 10,000 characters.</small>
-                    <textarea name="content" id="blogname" value="{{ blogname }}" required maxlength="10000" ></textarea>
-                    <br class = "spacing" />
+                <label for="pic1">Image URL</label>
+                <input type="url" name="pic" id="pic1" />
+                <label for="content1">Entry Content <span class="required">*</span></label>
+                <textarea name="content" id="blogname" value="{{ blogname }}" required maxlength="10000" ></textarea>
+                <small class="help-text">May not exceed 10,000 characters.</small>
+                <br class = "spacing" />
 
 
-                    <label for="submit"></label>
-                    <input name="addEntry" type="submit" value="Add Entry" />
-                </form>
-            </div>
+                <label for="submit"></label>
+                <input name="addEntry" type="submit" class="editbutton" value="Add Entry" />
+            </form>
+        </div>
 
-            <div class="containers">
-                <h1 class="title">Edit Entries</h1>
-                {% if not entries %}
-                    <h3>You don't have any entries for this blog...</h3>
+        <div class="containers cell medium-12" id="editentriessection">
+            <h1 class="title">Edit Entries</h1>
+            {% if not entries %}
+                <h3>You don't have any entries for this blog...</h3>
+        
+
+        </div>
+    </div>
                 {% else %}
-                    <nav>
+                    <div class="pages">
                         {% for page in entries %}
                             {% if loop.index != pageNum %}
                                 <a href="{{ url_for('blog.editBlog', pageNum=loop.index) }}">Page {{loop.index}}</a>
@@ -65,51 +66,50 @@
                                 <p>Page {{loop.index}}</p>
                             {% endif %}
                         {% endfor %}
-                    </nav>
+                    </div>
             </div>
 
-            <div class="containers entries">
+            <div class="containers entries cell medium-12">
                     {% for entry in entries[pageNum - 1] %}
                         <form class="containers loginForm" action="{{ url_for('blog.editEntries', entryID=entry['id']) }}" method="POST">
                             <label for="title2">Entry Title <span class="required">*</span></label>
-                            <br class = "spacing" />
-                            <small>May not exceed 100 characters.</small>
                             <input type="text" name="title" id="title1" value="{{ entry['title'] }}" maxlength="100" />
+                            <small class="help-text">May not exceed 100 characters.</small>
                             <br class = "spacing" />
 
                             <label for="pic2">Image URL</label>
                             <input type="url" name="pic" id="pic1" value="{{ entry['pic'] }}" />
-                            <br class = "spacing" />
                             <label for="content2">Entry Content <span class="required">*</span></label>
-                            <br class = "spacing" />
-                            <small>May not exceed 10,000 characters.</small>
                             <textarea name="content" id="content2" required maxlength="10000">{{ entry['post'] }}</textarea>
+                            <small class="help-text">May not exceed 10,000 characters.</small>
                             <br class = "spacing" />
 
 
                             <label for="submit"></label>
-                            <input name="editEntry" type="submit" value="Edit Entry" />
+                            <input name="editEntry" type="submit" class="editbutton" value="Edit Entry" />
 
                             <details>
                                 <summary>Delete Entry</summary>
-                                <input name="deleteEntry" type="submit" value="Confirm Delete Entry" />
+                                <input name="deleteEntry" type="submit" class="editbutton" value="Confirm Delete Entry" />
                             </details>
                         </form>
+                        <br class = "spacing" />
                     {% endfor %}
             </div>
-
+<!--
             <div class="containers">
-                    <nav>
-                        {% for page in entries %}
-                            {% if loop.index != pageNum %}
-                                <a href="{{ url_for('blog.editBlog', pageNum=loop.index) }}">Page {{loop.index}}</a>
-                            {% else %}
-                                <p>Page {{loop.index}}</p>
-                            {% endif %}
-                        {% endfor %}
-                    </nav>
+                <div class="pages">
+                    {% for page in entries %}
+                        {% if loop.index != pageNum %}
+                            <a href="{{ url_for('blog.editBlog', pageNum=loop.index) }}">Page {{loop.index}}</a>
+                        {% else %}
+                            <p>Page {{loop.index}}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
                 {% endif %}
             </div>
+-->
         </div>
     </body>
 {% endblock %}

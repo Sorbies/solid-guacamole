@@ -1,2 +1,2 @@
 language = "python3"
-run = ""
+run = "flask run --host='0.0.0.0' --debugger --reload"

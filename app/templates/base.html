@@ -1,35 +1,46 @@
-{% if pageNum is not defined %}
-    {% set pageNum = 1 %}
-{% endif %}
+{% if pageNum is not defined %} {% set pageNum = 1 %} {% endif %}
 <!doctype html>
 <title>{% block title %}{% endblock %}</title>
 <!-- Compressed CSS -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
+ crossorigin="anonymous">
 
 <!-- Our CSS -->
 <link rel="stylesheet" href="/static/styles.css" />
 
 <!-- Compressed JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
-<!-- **** Add if g.user, header visible, else not visible -->
-<nav>
-	<div id="header">
-		<div id="left">
-			<a id="home" href="{{ url_for('blog.homepage') }}">Home</a>
-			<a id="edit" href="{{ url_for('blog.editBlog') }}">Edit My Blog</a>
-			<a id="follow" href="{{ url_for('follow.followedBlogs') }}">Followed Blogs</a>
-		</div>
-		<div id="center">
-			<form action="{{ url_for('search.searchFunction') }}" method="POST">
-				<input type="text" name="keywords" id="keywords" placeholder="Enter search terms" required />
-              <input name="search" id="search" type="submit" value="Search"/>
-          </form>
-      </div>
-      <div id="right">
-          <a id="logout" href="{{ url_for('auth.logout') }}">Log Out, {{ username }}</a>
-      </div>
-  </div>
-</nav>
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
+ crossorigin="anonymous">
+</script>
+
+<div class="top-bar grid-x fluid stack-for-medium">
+	<div class="cell medium-5">
+		<ul class="dropdown menu" data-dropdown-menu>
+			<li class="menu-text">Solid Guacamole</li>
+			<li><a id="home" href="{{ url_for('blog.homepage') }}">Home</a></li>
+			<li><a id="edit" href="{{ url_for('blog.editBlog') }}">Edit My Blog</a></li>
+			<li><a id="follow" href="{{ url_for('follow.followedBlogs') }}">Followed Blogs</a></li>
+		</ul>
+	</div>
+
+    <div class="grid-x cell medium-5 align-center">
+        <form action="{{ url_for('search.searchFunction') }}" class="grid-x row align-center" method="POST">
+            <div class="input-group">
+                <input class="input-group-field flex-child-grow" type="text" name="keywords" id="keywords" placeholder="Enter search terms" required />
+                <div class="input-group-button">
+                    <input name="search" id="search" type="submit" value="Search"/>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="cell medium-2 grid-x align-right">
+		<ul class="dropdown menu align-right" data-dropdown-menu>
+            <li><a id="logout" href="{{ url_for('auth.logout') }}">Log Out, {{ username }}</a></li>
+		</ul>
+    </div>    
+</div>
+
 <section class="content">
   <header>
     {% block header %}{% endblock %}

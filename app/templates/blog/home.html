@@ -1,47 +1,44 @@
 {% extends 'base.html' %} {% block header %}
-<h1>{% block title %}Welcome to Riidordie, {{ username }}{% endblock %}</h1>
+<h1>{% block title %}Welcome to Solid Guacamole, {{ username }}{% endblock %}</h1>
 {% endblock %} {% block content %}
 
-<body>
-	<div id="home">
-		<div class="container">
-			<h1 class="title">Welcome to Riidordie, {{ username }}</h1>
-			{% if error_msg is defined and error_msg %}
-			<p class="error-msg">{{ error_msg }}</p>
-			{% endif %} {% if not blogs %}
-			<h3>No blogs created yet.</h3>
-			{% else %}
-			<table class="hover">
-				<thead>
-					<th>Blog Name</th>
-					<th>Blog Creator</th>
-					<th>Last Updated</th>
-					<th>Description</th>
-					<th>Following</th>
-				</thead>
-				{% for blog in blogs %}
-				<tr>
-					<td><a href="{{ url_for('blog.viewBlog', username=blog['username']) }}">{{ blog["blogname"] }}</a></td>
-					<td>{{ blog["username"] }}</td>
-					<td>{{ blog["time"] }}</td>
-					<td class="desc">{{ blog["blogdescription"] }}</td>
-					<td>
-						{% if username != blog["username"] %} {% if blog["blogname"] not in following %}
-						<form action="{{ url_for('follow.follow', username=blog['username']) }}" method="POST">
-							<input type="submit" name="home" value="Follow Blog" />
-                      </form>
-                    {% else %}
-                      <form action="{{ url_for('follow.unfollow', username=blog['username']) }}" method="POST">
-                          <input type="submit" name="home" value="Unfollow Blog" />
-                      </form>
-                    {% endif %}
-                  {% endif %}
-                </td>
-              </tr>
-            {% endfor %}
-          </table>
-        {% endif %}
-      </div>
+<body class="allpages">
+    <div class="container">
+        {% if error_msg is defined and error_msg %}
+        <p class="error-msg">{{ error_msg }}</p>
+        {% endif %} {% if not blogs %}
+        <h3>No blogs created yet.</h3>
+        {% else %}
+        <table>
+            <thead id="table-header">
+                <th>Blog Name</th>
+                <th>Blog Creator</th>
+                <th>Last Updated</th>
+                <th>Description</th>
+                <th>Following</th>
+            </thead>
+            {% for blog in blogs %}
+            <tr>
+                <td><a href="{{ url_for('blog.viewBlog', username=blog['username']) }}">{{ blog["blogname"] }}</a></td>
+                <td>{{ blog["username"] }}</td>
+                <td>{{ blog["time"] }}</td>
+                <td class="desc">{{ blog["blogdescription"] }}</td>
+                <td>
+                    {% if username != blog["username"] %} {% if blog["blogname"] not in following %}
+                    <form action="{{ url_for('follow.follow', username=blog['username']) }}" method="POST">
+                        <input type="submit" id="follow" name="home" value="Follow Blog" class="hollow button"/>
+                    </form>
+                	{% else %}
+                    <form action="{{ url_for('follow.unfollow', username=blog['username']) }}" method="POST">
+                        <input type="submit" id="unfollow" name="home" value="Unfollow Blog" class="hollow button alert" />
+                    </form>
+                	{% endif %}
+                {% endif %}
+            	</td>
+            </tr>
+        {% endfor %}
+        </table>
+    {% endif %}
     </div>
-  </body>
+</body>
 {% endblock %}

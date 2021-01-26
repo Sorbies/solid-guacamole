@@ -3,13 +3,12 @@
 <h1>{% block title %}{{ blogname }} - Riidordie{% endblock %}</h1>
 {% endblock %} {% block content %}
 
-<body>
+<body class="allpages">
 	<div id="bloghome">
 		<div class="containers">
 			{% if error_msg is defined and error_msg %}
 			<p class="error-msg">{{ error_msg }}</p>
 			{% endif %}
-			<h1 class="title">{{ blogname }}</h1>
 			<p>A blog by <u>{{ creator }}</u></p>
 			<div class="text">
 				{% for line in blogdescription %}
@@ -18,11 +17,11 @@
 			</div>
 			{% if not iscreator %} {% if following %}
 			<form action="{{ url_for('follow.unfollow', username=creator) }}" method="POST">
-				<input type="submit" name="viewBlog" value="Unfollow Blog">
+				<input type="submit" id="unfollow" name="viewBlog" class="hollow button alert" value="Unfollow Blog">
                         </form>
                     {% else %}
                         <form action="{{ url_for('follow.follow', username=creator) }}" method="POST">
-                            <input type="submit" name="viewBlog" value="Follow Blog">
+                            <input type="submit" name="viewBlog" class="hollow button" id="follow" value="Follow Blog">
                         </form>
                     {% endif %}
                 {% endif %}
@@ -45,16 +44,23 @@
 
             <div class="containers entries">
                 {% for entry in entries[pageNum - 1] %}
-                    <fieldset class="containers">
-                        <legend>{{ entry["title"] }}</legend>
-                        <p>Posted at {{ entry["time"] }}</p>
+                    <div class="card">
+                        <div class="card-divider">
+                            <h4>{{ entry["title"] }}</h4>
+                            <br>
+                            <p>Posted at {{ entry["time"] }}</p>
+                        </div>
                         {% if entry["pic"] != "" %}
+                        <div class="card-image">
                             <img src="{{ entry['pic'] }}" />
+                        </div>
                         {% endif %}
-                        {% for line in entry["post"] %}
-                            <p>{{ line }}</p>
-                        {% endfor %}
-                    </fieldset>
+                        <div class="card-section">
+                            {% for line in entry["post"] %}
+                                <p>{{ line }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
                 {% endfor %}
             </div>
 

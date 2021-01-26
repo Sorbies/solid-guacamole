@@ -43,11 +43,14 @@ SENDS to / by GET
 <body class="grid-container fluid" style="width: 100%">
 	<div class="hero-section grid-x grid-margin-x">
 		<div class="translucent-form-overlay cell medium-5">
-			{% if error_msg is defined %} {% for error in error_msg %}
-			<p class="error-msg">Problem Registering an Account: {{ error }}</p>
-			{% endfor %} {% endif %}
-			<form action="{{ url_for('auth.register') }}" method="POST">
+			<form data-abide action="{{ url_for('auth.register') }}" method="POST">
 				<h1 class="title">Register an Account</h1>
+                <div class="row columns">
+                    {% if error_msg is defined %} {% for error in error_msg %}
+                    <p class="error-msg">Error: {{ error }}</p>
+                    {% endfor %} {% endif %}
+                </div>
+
 				<div class="row columns">
 					<label for="username">Username <span class="required">*</span></label>
                     <input type="text" name="username" id="username" required pattern="[A-Za-z_0-9]+" maxlength="100" />
@@ -81,7 +84,7 @@ SENDS to / by GET
                 <p id="link">Already registered? <a href="{{ url_for('auth.login') }}">Log in here.</a>
             </form>
         </div>
-		<div class="hero-section-text cell medium-7">
+		<div class="hero-section-text cell medium-7 text-right">
 			<h1>Solid Guacamole</h1>
 			<h5>Food, food, and more food!</h5>
 		</div>

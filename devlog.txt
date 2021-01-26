@@ -25,10 +25,10 @@ guac -- 2021-1-16
   - configured wsgi and conf folders for apache on the droplet
   - BUG: cannot get p0 to work on apache, error "Address already in use"
 
-IG, ICA -- 2021-1-17
+ishitaG, ianC -- 2021-1-17
   - refactored login/register/blog/home routes into blueprints
 
-EL -- 2021-1-17
+ericL -- 2021-1-17
   - changed droplet firewall configs to fix an ssh connection timing out error, added IG and IAC to ssh perms for droplet
   - switched from working on root to joe on droplet
   - purged apache and redid all the steps to put the working basic flask app back up, since we couldn't figure out why p0 was bugging
@@ -37,45 +37,76 @@ guac -- 2021-1-19
   - came to a consensus to use IG and IAC's p0 instead of MT's p0 due to more people being familiar with it
   - set up a separate repl and repo to house alternate p0
 
-IG, EL, MT -- 2021-1-19
+ishitaG, ericL, michelleT -- 2021-1-19
   - tried starting over the apache setup on the droplet again, but still couldn't figure out why the p0 was bugging
 
-IAC -- 2021-1-19
+ianC -- 2021-1-19
   - figured out why p0 was not working!
   - had to do with write/read/execute perms from apache's user, www-data, with the github repo folder we imported.
   - also needed to specify absolute file paths instead of relative because apache has / as working dir 
 
-IG -- 2021-1-20
+ishitaG -- 2021-1-20
   - refactored db_builder.py by organizing methods and changing method calls into dictionary calls
   - refactored app.py to match new db_builder
   - turned header.html into a base template, and edited all other templates so they extended base.hyml
 
-IG, IAC -- 2021-1-20
+ishitaG, ianC -- 2021-1-20
   - split app.py into __init__.py, blog.py, auth.py, search.py, and follow.py
   - registered blueprints and created login required wrapper
     - replaced redirecting users with wrapper
   - refactored blog.py and auth.py for the blog and authentication related routes
 
-EL, MT -- 2021-1-20
+ericL, michelleT -- 2021-1-20
   - refactored follow.py and search.py for the follow and search related routes
  
 guac -- 2021-1-21
   - began exploring foundation
   - fake grimlock?
 
-EL -- 2021-1-21
+ericL -- 2021-1-21
   - merged the alternate repl and repo into the main repl and repo
-  - updated README
-  - updated devlog 
+  - updated README and devlog
 
-IG, MT, EL -- 2021-1-21
+ishitaG, michelleT, ericL -- 2021-1-21
   - BUG: sometimes refreshing the website leads to an internal server error, 
     may be a database issue. Also the routing with login/register is a little
     wonky.
   - Installed Foundation on our local computers 
 
-IG -- 2021-1-21
+ishitaG -- 2021-1-21
   - Added CDN sheets to templates
   - Styled the registration page
   - BUG: after a while running the app let to "OCError: [Errno 98] Address already in use
   - Styling to-do: get header and form inline, remove margins
+
+ishitaG -- 2021-1-21
+  - Was able to fix bug via Ian's help (was a repl.it issue)
+  - Finish to-do's from previous commit (finished styling reg page)
+  - Styled login page
+
+ericL -- 2021-1-22
+  - Started to format top bar of base.html into foundation, having trouble
+    getting the search bar to span the vast majority of the bar
+
+ishitaG -- 2021-1-22
+  - Styled the home page    
+    - Styled the table, added background, fixed titles on page
+
+ishitaG, ianC, michelleT -- 2021-1-26
+  - Fixed random apache deployment error, somehow www-data lost perms to edit database. Maybe perms got reset when we git pulled on droplet?
+
+ishitaG, ericL, ianC -- 2021-1-26
+  - Fixed search bar button width
+  - Moved log out button to right side
+
+ishitaG, ericL, michelleT -- 2021-1-26
+  - Fixed the way the top bar compresses weirdly on medium screens
+
+ericL, ianC -- 2021-1-26
+  - Began styling the edit blogs page
+  - issue: pagination is not working correctly
+  - to-do: center the edit entries with cards/decrease size of headers, decrease size of edit entry boxes
+
+ishitaG, michelleT -- 2021-1-26
+  - Finished styling the follow/unfollow buttons on all pages
+  - Began working on styling entries on the view blogs page

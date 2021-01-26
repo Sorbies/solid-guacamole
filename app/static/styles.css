@@ -20,8 +20,9 @@
 
 .hero-section .hero-section-text {
     color: #000000;
-    text-shadow: 1px 1px 2px #0a0a0a;
+    text-shadow: 1px 1px 2px hsl(0, 0%, 4%);
 }
+
 
 /* LOGIN/REGISTRATION FORM */
 .translucent-form-overlay {
@@ -50,4 +51,145 @@
 
 .translucent-form-overlay a {
     color: rgb(205, 227, 255);
+}
+
+.help-text {
+    color: rgb(205, 227, 255);
+}
+
+/* ERROR MESSAGE */
+.error-msg {
+    color: rgb(205, 227, 255);
+}
+
+/* NAV BAR */
+.top-bar {
+    padding: 0px;
+    width: 100%;
+    height: auto;
+    min-height: 45px;
+}
+
+.top-bar .input-group {
+    margin: 0px;
+    /* height: 30px; */
+}
+
+input #search {
+    margin: 0px;
+    background: rgb(205, 227, 255);
+}
+
+input #keywords {
+    width: 600px;
+}
+
+.top-bar .input-group-field {
+    max-width: 600px;
+}
+
+.top-bar * {
+    float: left;
+}
+
+/* CONTENT FOR ALL PAGES BESIDES LOGIN/REG*/
+.allpages {
+    background: url("https://scottchoucino.com/wp-content/uploads/2016/12/ScottChoucino-1-1.jpg") no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+/* the heading on each page */
+.allpages h1 {
+    display: table;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.603);
+}
+
+.title {
+    color: white;
+}
+
+.content {
+    padding: 0 calc((100% - min(100%, 1500px)) / 2);
+}
+/* TABLE FOR HOME/FOLLOW */
+
+section.content {
+    margin: 10px;
+}
+
+table thead {
+    border: 0px;
+}
+
+table th {
+    background-color: #292929;
+    color: white;
+}
+
+#unfollow {
+    margin: 0px;
+    width: 120px;
+}
+
+#follow {
+    margin: 0px;
+    width: 120px;
+}
+
+/* EDIT BLOG */
+
+/*
+div.containers {
+    color: white;
+}
+*/
+
+div.containers form label {
+    color: white;
+}
+
+
+div#stylemepls {
+    background-color: rgba(54, 54, 54, 0.8);
+    padding: 10px 10px 10px 10px;
+    color: white;
+}
+
+small.help-text {
+    margin-top: 0px;
+    margin-bottom: 40px;
+}
+
+div#editentriessection {
+    margin-top: 30px;
+}
+
+input.editbutton {
+    background: rgb(71, 133, 214)
+}
+
+input[type="text"], textarea {
+    margin-bottom: 0px;
+}
+
+
+/* VIEW BLOG ENTRIES */
+
+.card {
+	width: 80%;
+	margin: auto;
+	margin-bottom: 30px;
+}
+.card-divider h4 {
+	padding-right: 10px;
+}
+
+.card-image img {
+	max-height: 300px; 
+    display: block;
+    margin: 0 auto;
 }
