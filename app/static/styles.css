@@ -159,7 +159,7 @@ div#stylemepls {
     color: white;
 }
 
-small.help-text {
+#stylemepls small.help-text {
     margin-top: 0px;
     margin-bottom: 40px;
 }
@@ -168,11 +168,7 @@ div#editentriessection {
     margin-top: 30px;
 }
 
-input.editbutton {
-    background: rgb(71, 133, 214)
-}
-
-input[type="text"], textarea {
+#stylemepls input[type="text"], #stylemepls textarea {
     margin-bottom: 0px;
 }
 
@@ -190,6 +186,18 @@ input[type="text"], textarea {
 
 .card-image img {
 	max-height: 300px; 
-    display: block;
+    /* display: block; */
     margin: 0 auto;
+}
+
+.creator {
+	color:white; 
+}
+
+.blog-desc {
+	color: white;
+}
+
+.no-entries {
+	color: white;
 }

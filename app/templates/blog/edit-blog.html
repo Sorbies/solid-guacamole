@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block header %}
-<h1>{% block title %}Editing {{ blogname }} - SG{% endblock %}</h1>
+<h1>{% block title %}Editing {{ blogname }} - Solid Guacamole{% endblock %}</h1>
 {% endblock %} {% block content %}
 
 <body class="allpages">
@@ -24,7 +24,7 @@
                     <br class = "spacing" />
 
                     <label for="submit"></label>
-                    <input name="blog" type="submit" class="editbutton" value="Update Blog Name and Description" />
+                    <input name="blog" type="submit" class="primary button expanded search-button" value="Update Blog Name and Description" />
                 </form>
             </div>
 
@@ -45,7 +45,7 @@
 
 
                 <label for="submit"></label>
-                <input name="addEntry" type="submit" class="editbutton" value="Add Entry" />
+                <input name="addEntry" type="submit" class="primary button expanded search-button" value="Add Entry" />
             </form>
         </div>
 
@@ -86,11 +86,11 @@
 
 
                             <label for="submit"></label>
-                            <input name="editEntry" type="submit" class="editbutton" value="Edit Entry" />
+                            <input name="editEntry" type="submit" class="primary button expanded search-button" value="Edit Entry" />
 
                             <details>
                                 <summary>Delete Entry</summary>
-                                <input name="deleteEntry" type="submit" class="editbutton" value="Confirm Delete Entry" />
+                                <input name="deleteEntry" type="submit" class="primary button expanded search-button" value="Confirm Delete Entry" />
                             </details>
                         </form>
                         <br class = "spacing" />

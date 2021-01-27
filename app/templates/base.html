@@ -14,16 +14,16 @@
 </script>
 
 <div class="top-bar grid-x fluid stack-for-medium">
-	<div class="cell medium-5">
+	<div class="cell medium-4">
 		<ul class="dropdown menu" data-dropdown-menu>
 			<li class="menu-text">Solid Guacamole</li>
-			<li><a id="home" href="{{ url_for('blog.homepage') }}">Home</a></li>
-			<li><a id="edit" href="{{ url_for('blog.editBlog') }}">Edit My Blog</a></li>
-			<li><a id="follow" href="{{ url_for('follow.followedBlogs') }}">Followed Blogs</a></li>
+			<li><a href="{{ url_for('blog.homepage') }}">Home</a></li>
+			<li><a href="{{ url_for('blog.editBlog') }}">Edit My Blog</a></li>
+			<li><a href="{{ url_for('follow.followedBlogs') }}">Followed Blogs</a></li>
 		</ul>
 	</div>
 
-    <div class="grid-x cell medium-5 align-center">
+    <div class="grid-x cell medium-6 align-center">
         <form action="{{ url_for('search.searchFunction') }}" class="grid-x row align-center" method="POST">
             <div class="input-group">
                 <input class="input-group-field flex-child-grow" type="text" name="keywords" id="keywords" placeholder="Enter search terms" required />

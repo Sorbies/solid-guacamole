@@ -104,9 +104,20 @@ ishitaG, ericL, michelleT -- 2021-1-26
 
 ericL, ianC -- 2021-1-26
   - Began styling the edit blogs page
-  - issue: pagination is not working correctly
-  - to-do: center the edit entries with cards/decrease size of headers, decrease size of edit entry boxes
+  - Put add entry to the top right, next to metadata
+  - Adjusted spacing of input fields and labels, moved help text underneath
+  - Made buttons blue temporarily
+  - Added semi transluscent background
+  - Issue: pagination is not working correctly
+  - To-do: center the edit entries with cards/decrease size of headers, decrease size of edit entry boxes
+  - Fixed search bar misalignment
 
 ishitaG, michelleT -- 2021-1-26
   - Finished styling the follow/unfollow buttons on all pages
-  - Began working on styling entries on the view blogs page
+  - Fixed search bar issue with text not displaying correctly
+  - Styled view blog page
+    - Used card class to style entries
+  - Fixed text color issues
+  - To-do: style search results page
+
+issue: nav bar shennanigans
