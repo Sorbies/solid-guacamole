@@ -28,11 +28,9 @@ def create_app(test_config=None):
         # if user tries to access page that doesn't exist
         @app.errorhandler(404)
         def error404(e):
-            # return page not found template if user is logged in
+            # redirect user to login page
             if g.user is None:
-                return render_template("error/404.html", code=404)
-            # otherwise redirect user to login page
-            return redirect(url_for("auth.login"))
+                return redirect(url_for("auth.login"))
 
         app.add_url_rule('/', endpoint='index')
         return app

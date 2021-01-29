@@ -8,9 +8,10 @@ blogdescription - String of attempted blog description, undefined otherwise
 
 IMPORTS
 /static/styles.css
+foundation css and javascript
 
 [if user submits registration form]
-SENDS to /register by POST
+SENDS to auth.register by POST
 username        - Username
 password        - Password
 password-conf   - Confirmed password
@@ -19,75 +20,80 @@ blogdescription - Blog description
 register        - Submit button
 
 [if user wants to log in]
-SENDS to / by GET
+SENDS to auth.login by GET
 -->
 <!DOCTYPE html>
 <html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Register an Account - SG</title>
 
-<head>
-	<meta charset="utf-8" />
-	<title>Register an Account - SG</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
-	 crossorigin="anonymous">
+        <!-- ICON -->
+        <link rel="icon" href="https://www.svgrepo.com/show/48219/avocado.svg">
 
-	<!-- Our CSS -->
-	<link rel="stylesheet" href="/static/styles.css" />
+        <!-- Foundation CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
+        crossorigin="anonymous" />
 
-	<!-- Compressed JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
-	 crossorigin="anonymous">
+        <!-- Our CSS -->
+        <link rel="stylesheet" href="/static/styles.css" />
+        
+        <!-- Import Font -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat+Alternates">
 
-	</script>
-</head>
+        <!-- Compressed JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
+        crossorigin="anonymous"></script>
+    </head>
 
-<body class="grid-container fluid" style="width: 100%">
-	<div class="hero-section grid-x grid-margin-x">
-		<div class="translucent-form-overlay cell medium-5">
-			<form data-abide action="{{ url_for('auth.register') }}" method="POST">
-				<h1 class="title">Register an Account</h1>
-                <div class="row columns">
-                    {% if error_msg is defined %} {% for error in error_msg %}
-                    <p class="error-msg">Error: {{ error }}</p>
-                    {% endfor %} {% endif %}
-                </div>
+    <body class="grid-container fluid" style="width: 100%">
+        <div class="hero-section grid-x grid-margin-x">
+            <div class="translucent-form-overlay cell medium-5">
+                <form data-abide action="{{ url_for('auth.register') }}" method="POST">
+                    <h1 class="title">Register an Account</h1>
+                    <div class="row columns">
+                        {% if error_msg is defined %} {% for error in error_msg %}
+                            <p class="error-msg">Error: {{ error }}</p>
+                        {% endfor %} {% endif %}
+                    </div>
 
-				<div class="row columns">
-					<label for="username">Username <span class="required">*</span></label>
-                    <input type="text" name="username" id="username" required pattern="[A-Za-z_0-9]+" maxlength="100" />
-                    <p class="help-text">Can only contain letters, numbers, and underscores.</p>
-                </div>
+                    <div class="row columns">
+                        <label for="username">Username <span class="required">*</span></label>
+                        <input type="text" name="username" id="username" required pattern="[A-Za-z_0-9]+" maxlength="100" />
+                        <p class="help-text">Can only contain letters, numbers, and underscores.</p>
+                    </div>
 
-                <div class="row columns">
-                    <label for="password">Password <span class="required">*</span></label>
-                    <input type="password" name="password" id="password" required minlength="8" maxlength="100" />
-                    <p class="help-text">Must be at least 8 characters long.</p>
-                </div>
+                    <div class="row columns">
+                        <label for="password">Password <span class="required">*</span></label>
+                        <input type="password" name="password" id="password" required minlength="8" maxlength="100" />
+                        <p class="help-text">Must be at least 8 characters long.</p>
+                    </div>
 
-                <div class="row columns">
-                    <label for="password-conf">Confirm Password <span class="required">*</span></label>
-                    <input type="password" name="password-conf" id="password-conf" required minlength="8" maxlength="100"/>
-                </div>
+                    <div class="row columns">
+                        <label for="password-conf">Confirm Password <span class="required">*</span></label>
+                        <input type="password" name="password-conf" id="password-conf" required minlength="8" maxlength="100"/>
+                    </div>
 
-                <div class="row columns">
-                    <label for="blogname">Blog Name <span class="required">*</span></label>
-                    <input type="text" name="blogname" id="blogname" value="{{ blogname }}" required maxlength="100" />
-                    <p class="help-text">May not exceed 100 characters.</p>
-                </div>
+                    <div class="row columns">
+                        <label for="blogname">Blog Name <span class="required">*</span></label>
+                        <input type="text" name="blogname" id="blogname" value="{{ blogname }}" required maxlength="100" />
+                        <p class="help-text">May not exceed 100 characters.</p>
+                    </div>
 
-                <div class="row columns">
-                    <label for="blogdescription">Blog Description</label>
-                    <textarea name="blogdescription" id="blogdescription" maxlength="250">{{ blogdescription }}</textarea>
-                    <p class="help-text">May not exceed 250 characters.</p>
-                </div>
+                    <div class="row columns">
+                        <label for="blogdescription">Blog Description</label>
+                        <textarea name="blogdescription" id="blogdescription" maxlength="250">{{ blogdescription }}</textarea>
+                        <p class="help-text">May not exceed 250 characters.</p>
+                    </div>
 
-                <input class="primary button expanded search-button" name="register" type="submit" value="Register" />
-                <p id="link">Already registered? <a href="{{ url_for('auth.login') }}">Log in here.</a>
-            </form>
+                    <input class="primary button expanded search-button" name="register" type="submit" value="Register" />
+                    <p id="link">Already registered? <a href="{{ url_for('auth.login') }}">Log in here.</a>
+                </form>
+            </div>
+            <div class="hero-section-text cell medium-7 text-right">
+                <h1>Solid Guacamole</h1>
+                <h5>Food, food, and more food!</h5>
+            </div>
         </div>
-		<div class="hero-section-text cell medium-7 text-right">
-			<h1>Solid Guacamole</h1>
-			<h5>Food, food, and more food!</h5>
-		</div>
-    </div>
-</body>
+    </body>
 </html>

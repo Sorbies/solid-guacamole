@@ -26,12 +26,13 @@ guac -- 2021-1-16
   - BUG: cannot get p0 to work on apache, error "Address already in use"
 
 ishitaG, ianC -- 2021-1-17
-  - refactored login/register/blog/home routes into blueprints
+  - Created __innit_.py and configured the app, adding blueprints
+  - Refactored login/register/blog/home routes into blueprints
 
 ericL -- 2021-1-17
   - changed droplet firewall configs to fix an ssh connection timing out error, added IG and IAC to ssh perms for droplet
   - switched from working on root to joe on droplet
-  - purged apache and redid all the steps to put the working basic flask app back up, since we couldn't figure out why p0 was bugging
+  - purged apache and redid all the steps to put the working basic flask app back up
 
 guac -- 2021-1-19
   - came to a consensus to use IG and IAC's p0 instead of MT's p0 due to more people being familiar with it
@@ -48,19 +49,21 @@ ianC -- 2021-1-19
 ishitaG -- 2021-1-20
   - refactored db_builder.py by organizing methods and changing method calls into dictionary calls
   - refactored app.py to match new db_builder
-  - turned header.html into a base template, and edited all other templates so they extended base.hyml
+  - turned header.html into a base template with a nav bar and {%blocks%}, and edited all other templates so they extended base.html
 
 ishitaG, ianC -- 2021-1-20
   - split app.py into __init__.py, blog.py, auth.py, search.py, and follow.py
   - registered blueprints and created login required wrapper
     - replaced redirecting users with wrapper
   - refactored blog.py and auth.py for the blog and authentication related routes
+  - modified html templates so that the urls were not hardcoded but received via the method wrappers 
+    - prevents the application from crashing if a route is modified
 
 ericL, michelleT -- 2021-1-20
   - refactored follow.py and search.py for the follow and search related routes
  
 guac -- 2021-1-21
-  - began exploring foundation
+  - began exploring foundation, watching tutorials and getting familiar with the kitchen sink
   - fake grimlock?
 
 ericL -- 2021-1-21
@@ -71,53 +74,81 @@ ishitaG, michelleT, ericL -- 2021-1-21
   - BUG: sometimes refreshing the website leads to an internal server error, 
     may be a database issue. Also the routing with login/register is a little
     wonky.
-  - Installed Foundation on our local computers 
+  - Installed Foundation on our local computers, unable to figure out how to incorporate with repl.it
 
 ishitaG -- 2021-1-21
-  - Added CDN sheets to templates
+  - Added CDN sheets to templates (still unable figure out how to incorporate downloaded foundation with repl.it)
   - Styled the registration page
+    - Styled the form (adjusted spacing of input fields and labels, moved help text underneath, added semi-transparent background), added background, styled logo 
   - BUG: after a while running the app let to "OCError: [Errno 98] Address already in use
   - Styling to-do: get header and form inline, remove margins
 
 ishitaG -- 2021-1-21
   - Was able to fix bug via Ian's help (was a repl.it issue)
-  - Finish to-do's from previous commit (finished styling reg page)
-  - Styled login page
+  - Finished to-do's from previous commit (finished styling reg page)
+  - Styled login page in the same manner as the registration page
 
 ericL -- 2021-1-22
-  - Started to format top bar of base.html into foundation, having trouble
-    getting the search bar to span the vast majority of the bar
+  - Started to format top bar, having trouble getting the search bar to span the vast majority of the bar
 
 ishitaG -- 2021-1-22
   - Styled the home page    
-    - Styled the table, added background, fixed titles on page
+    - Styled the table, added background, fixed typography on page, add margins and padding, etc.
+
+ianC -- 2021-1-22
+    - Added styling from home page table to followed blogs table
 
 ishitaG, ianC, michelleT -- 2021-1-26
   - Fixed random apache deployment error, somehow www-data lost perms to edit database. Maybe perms got reset when we git pulled on droplet?
 
-ishitaG, ericL, ianC -- 2021-1-26
+ishitaG, ericL -- 2021-1-26
   - Fixed search bar button width
   - Moved log out button to right side
 
-ishitaG, ericL, michelleT -- 2021-1-26
-  - Fixed the way the top bar compresses weirdly on medium screens
+ishitaG, ericL, ianC -- 2021-1-26
+  - Tried to fix the way the top bar compresses weirdly on medium screens (bug still exists)
 
 ericL, ianC -- 2021-1-26
   - Began styling the edit blogs page
-  - Put add entry to the top right, next to metadata
-  - Adjusted spacing of input fields and labels, moved help text underneath
-  - Made buttons blue temporarily
-  - Added semi transluscent background
+    - Put add entry to the top right, next to metadata
+    - Adjusted spacing of input fields and labels, moved help text underneath
+    - Added semi transluscent background
   - Issue: pagination is not working correctly
   - To-do: center the edit entries with cards/decrease size of headers, decrease size of edit entry boxes
-  - Fixed search bar misalignment
+  - Fixed search bar and button separation issue
 
 ishitaG, michelleT -- 2021-1-26
-  - Finished styling the follow/unfollow buttons on all pages
+  - Styled the follow/unfollow buttons on all pages
   - Fixed search bar issue with text not displaying correctly
   - Styled view blog page
-    - Used card class to style entries
-  - Fixed text color issues
+    - Used card class to style entries, correctly format blog name/description/creator name
+    - Properly align the entire container, as well as elements within it 
+    - Add max dimensions for image to prevent enormous entries
+  - Fixed text color issues (certain colors weren't visible on certain backgrounds)
   - To-do: style search results page
 
-issue: nav bar shennanigans
+ianC -- 2021-1-28
+  - pagination
+  - cleaning up templates
+  - imported jsquery and what-input into base.html to get the dropdown to work
+  
+ericL -- 2021-1-28
+  - reorganized edit blog entries into cards
+  - reorganized delete entry details menu into dropdown
+
+ishitaG, michelleT -- 2021-1-28
+  - Styled search results page
+    - Entries displayed as cards
+  - Modified nav bar (added color upon hover)
+  - Restyled all pages with new images/fonts/typography
+  - Restyled edit blog  
+    - Remove excess padding/margins
+    - Remove container for entire page and add to individual elements
+
+ishitaG -- 2021-1-28
+  - Restyled pages with new colors (added an orange/blye theme)
+  - BUG: viewing a blog gives routing error "werkzeug.routing.BuildError: Could not build url for endpoint 'blog.viewBlog' with values ['pageNum']. Did you forget to specify values ['username']?"
+  - BUG: if user who is not logged goes to non-existent page, shows home page with 404 error (somehow user gets a blank login, but if they click anywhere redirected to home page) (FIXED)
+  - Fixed bug with disappearing error message (too fast and weird background color)
+  - Added Solid Guacamole logo in tab
+  - To-do: add transparency to table, format title on login/reg, move add entry to the left a little, hover on nav doesn't cover whole thing

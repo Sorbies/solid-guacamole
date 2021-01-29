@@ -2,7 +2,7 @@
 .grid-container {
     padding: 0px;
     height: 100%;
-    background: url("https://api.time.com/wp-content/uploads/2018/08/gettyimages-619399572.jpg?quality=85&w=1024&h=512&crop=1") no-repeat center center fixed; 
+    background: url(https://www.adobe.com/content/dam/cc/us/en/products/creativecloud/photography/hub/CODERED_B1_food-photography_hero-img_900x420.jpg.img.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -12,17 +12,17 @@
 .hero-section {
     height: 100%;
     width: 100%;
-    text-align: right;
+    text-align: left;
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+    margin: 0px;
 }
 
 .hero-section .hero-section-text {
-    color: #000000;
+    color: whitesmoke;
     text-shadow: 1px 1px 2px hsl(0, 0%, 4%);
 }
-
 
 /* LOGIN/REGISTRATION FORM */
 .translucent-form-overlay {
@@ -30,7 +30,7 @@
     max-width: 500px;
     width: 100%;
     height: 100%;
-    background-color: rgba(54, 54, 54, 0.8);
+    background-color: rgba(133, 131, 131, 0.445);
     margin: 14px;
     padding: 10px 20px;
     color: #fefefe;
@@ -72,15 +72,28 @@
 
 .top-bar .input-group {
     margin: 0px;
-    /* height: 30px; */
 }
 
-input #search {
+.top-bar input[type="text"] {
+    height: 35px;
+}
+
+.top-bar li a {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.top-bar li a:hover {
+  	background-color: rgb(205, 227, 255);  
+}
+
+input#search {
     margin: 0px;
-    background: rgb(205, 227, 255);
+    background-color: rgba(31, 66, 141, 0.74);
+    color: white;
 }
 
-input #keywords {
+input#keywords {
     width: 600px;
 }
 
@@ -108,6 +121,17 @@ input #keywords {
     background-color: rgba(0, 0, 0, 0.603);
 }
 
+#bloghome h2 {
+    display: table;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.603);
+    font-size: 30px;
+}
+
+#regButton {
+    background-color: rgba(31, 66, 141, 0.74);
+}
+
 .title {
     color: white;
 }
@@ -121,6 +145,10 @@ section.content {
     margin: 10px;
 }
 
+table {
+    background: rgba(255, 255, 255, 0);
+}
+
 table thead {
     border: 0px;
 }
@@ -130,23 +158,32 @@ table th {
     color: white;
 }
 
+table tr {
+    height: 65px;
+    background-color: rgba(223, 162, 83, 0.432);
+}
+
 #unfollow {
     margin: 0px;
-    width: 120px;
+    width: 140px;
 }
 
 #follow {
     margin: 0px;
-    width: 120px;
+    width: 140px;
 }
 
 /* EDIT BLOG */
 
-/*
-div.containers {
-    color: white;
+
+.loginForm {
+    background: #2929298c;
+    padding: 10px 10px 10px 10px;
+	margin: auto;   
+    border: 5px;
+    border-color: whitesmoke;
 }
-*/
+
 
 div.containers form label {
     color: white;
@@ -154,14 +191,12 @@ div.containers form label {
 
 
 div#stylemepls {
-    background-color: rgba(54, 54, 54, 0.8);
-    padding: 10px 10px 10px 10px;
     color: white;
 }
 
-#stylemepls small.help-text {
-    margin-top: 0px;
-    margin-bottom: 40px;
+#stylemepls .spaced-button {
+    margin-top: 30px;
+    margin-bottom: 10px;
 }
 
 div#editentriessection {
@@ -172,6 +207,29 @@ div#editentriessection {
     margin-bottom: 0px;
 }
 
+#editcards {
+	width: 80%;
+	margin: auto;
+	margin-bottom: 30px;
+    color: #fefefe;
+    background: #2929298c;
+}
+
+#deleteEntryBg {
+    background-color: rgba(252, 167, 56, 0.808);
+}
+
+/* confirm delete entry */
+.dropdown-pane {
+    padding: 0px;
+}
+
+#dropdownbutton {
+    margin: 0px;
+    background-color: rgba(252, 167, 56, 0.808);
+}
+
+
 
 /* VIEW BLOG ENTRIES */
 
@@ -179,7 +237,15 @@ div#editentriessection {
 	width: 80%;
 	margin: auto;
 	margin-bottom: 30px;
+    background: #2929298c;
+    color: white;
 }
+
+.card-divider {
+    background: #0000008c;
+    color: white;
+}
+
 .card-divider h4 {
 	padding-right: 10px;
 }
@@ -200,4 +266,78 @@ div#editentriessection {
 
 .no-entries {
 	color: white;
+}
+
+/* SEARCH PAGE */
+
+.no-search-results h3 {
+	color: white;
+}
+
+/* PAGINATION */
+.pagination .current {
+    background-color: rgba(31, 66, 141, 0.74);
+}
+
+.pagination a {
+    color: white;
+    background-color: rgba(252, 167, 56, 0.808);
+}
+
+.pagination a:hover {
+    background-color: rgba(253, 184, 93, 0.808);
+}
+
+/* TYPOGRAPHY */
+
+* {
+    font-family: "Montserrat Alternates";
+}
+
+h1, h2, h3, h4 {
+    font-family: "Montserrat Alternates";   
+}
+
+/* Error message at top of page */
+.error-msg {
+    padding: 3px;
+    font-weight: bold;
+    animation-name: disappearing_msg;
+    animation-duration: 8s;
+    transition-timing-function: linear;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 1;
+    animation-direction: normal;
+    opacity: 1;
+    position: static;
+
+}
+
+/* Animation to make error message disappear */
+@keyframes disappearing_msg {
+    0% {
+        opacity: 1;
+    }
+
+    25% {
+        opacity: .75;
+    }
+
+    50% {
+        opacity: .5;
+    }
+
+    75% {
+        opacity: .25;
+    }
+
+    90% {
+        opacity: .1;
+    }
+
+    100% {
+        opacity: 0;
+        position: absolute;
+        z-index: -99999999;
+    }
 }

@@ -8,59 +8,67 @@ password  - Password
 
 IMPORTS
 /static/styles.css
+foundation css and javascript
 
 [if user tries to log in]
-SENDS to /login by POST
+SENDS to auth.login by POST
 username - Username
 password - Password
 login    - Submit button
 
 [if user wants to register an account]
-SENDS to /register by GET
+SENDS to auth.register by GET
 -->
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8" />
-	<title>Log In - SG</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
-	 crossorigin="anonymous">
+    <head>
+        <meta charset="utf-8" />
+        <title>Log In - SG</title>
 
-	<!-- Our CSS -->
-	<link rel="stylesheet" href="/static/styles.css" />
+        <!-- ICON -->
+        <link rel="icon" href="https://www.svgrepo.com/show/48219/avocado.svg">
 
-	<!-- Compressed JavaScript -->
-	<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
-	 crossorigin="anonymous">
-	</script>
-</head>
+        <!-- Foundation CSS -->
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I="
+        crossorigin="anonymous">
 
-<body class="grid-container fluid" style="width: 100%; height: 100%">
-	<div class="hero-section grid-x grid-margin-x"> 
-		<div class="translucent-form-overlay cell medium-5">
-			{% if error_msg is defined %}
-			<p class="error-msg">{{ error_msg }}</p>
-			{% endif %}
-			<form action="{{ url_for('auth.login') }}" method="POST">
-				<h1 class="title">Log In</h1>
-				<div class="row columns">
-					<label for="username">Username <span class="required">*</span></label>
-                    <input type="text" name="username" id="username" value="{{ username }}" required />
-                </div>
+        <!-- Our CSS -->
+        <link rel="stylesheet" href="/static/styles.css" />
 
-                <div class="row columns">
-                    <label for="password">Password <span class="required">*</span></label>
-                    <input type="password" name="password" id="password" value="{{ password }}" required />
-                </div>
+        <!-- Import Font -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat+Alternates">
 
-                <input class="primary button expanded search-button" name="login" type="submit" value="Log In" />
-                <p id="link">Not a registered user? <a href="{{ url_for('auth.register') }}">Register here.</a></p>
-            </form>
+        <!-- Foundation JavaScript -->
+        <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
+        crossorigin="anonymous"></script>
+    </head>
+
+    <body class="grid-container fluid" style="width: 100%; height: 100%">
+        <div class="hero-section grid-x grid-margin-x"> 
+            <div class="translucent-form-overlay cell medium-5">
+                {% if error_msg is defined %}
+                    <p class="error-msg">{{ error_msg }}</p>
+                {% endif %}
+                <form action="{{ url_for('auth.login') }}" method="POST">
+                    <h1 class="title">Log In</h1>
+                    <div class="row columns">
+                        <label for="username">Username <span class="required">*</span></label>
+                        <input type="text" name="username" id="username" value="{{ username }}" required />
+                    </div>
+
+                    <div class="row columns">
+                        <label for="password">Password <span class="required">*</span></label>
+                        <input type="password" name="password" id="password" value="{{ password }}" required />
+                    </div>
+
+                    <input class="primary button expanded search-button" name="login" type="submit" value="Log In" />
+                    <p id="link">Not a registered user? <a href="{{ url_for('auth.register') }}">Register here.</a></p>
+                </form>
+            </div>
+            <div class="hero-section-text cell medium-offset-4 medium-3">
+                <h1>Solid Guacamole</h1>
+                <h5>Food, food, and more food!</h5>
+            </div>
         </div>
-        <div class="hero-section-text cell medium-7">
-			<h1>Solid Guacamole</h1>
-			<h5>Food, food, and more food!</h5>
-		</div>
-    </div>
-</body>
+    </body>
 </html>

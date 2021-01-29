@@ -1,22 +1,28 @@
 <!-- put this in content?? -->
-{% if pageNum is not defined %} {% set pageNum = 1 %} {% endif %} {% extends 'base.html' %} {% block header %}
-<h1>{% block title %}{{ blogname }}{% endblock %}</h1>
-{% endblock %} {% block content %}
+{% if pageNum is not defined %}
+    {% set pageNum = 1 %}
+{% endif %}
+{% extends 'base.html' %}
+{% block header %}
+    <h1>{% block title %}{{ blogname }}{% endblock %}</h1>
+{% endblock %}
 
-<body class="allpages">
-    <div class="containers">
-        <p class="creator">A blog by <u>{{ creator }}</u></p>
-        <div class="blog-desc">
-            {% for line in blogdescription %}
-            <p>{{ line }}</p>
-            {% endfor %}
-        </div>
-        {% if error_msg is defined and error_msg %}
-            <p class="error-msg">{{ error_msg }}</p>
-        {% endif %}
-        {% if not iscreator %} {% if following %}
-        <form action="{{ url_for('follow.unfollow', username=creator) }}" method="POST">
-            <input type="submit" id="unfollow" name="viewBlog" class="hollow button alert" value="Unfollow Blog">
+{% block content %}
+    <body class="allpages">
+        <div class="containers">
+            <p class="creator">A blog by <u>{{ creator }}</u></p> 
+            <div class="blog-desc">
+                {% for line in blogdescription %}
+                    <p>{{ line }}</p>
+                {% endfor %}
+            </div>
+            {% if error_msg is defined and error_msg %}
+                <p class="error-msg">{{ error_msg }}</p>
+            {% endif %}
+            {% if not iscreator %}
+                {% if following %}
+                    <form action="{{ url_for('follow.unfollow', username=creator) }}" method="POST">
+                        <input type="submit" id="unfollow" name="viewBlog" class="hollow button alert" value="Unfollow Blog">
                     </form>
                 {% else %}
                     <form action="{{ url_for('follow.follow', username=creator) }}" method="POST">
@@ -26,54 +32,59 @@
             {% endif %}
         </div>
 
-        <div class="containers">
-            {% if not entries %}
+        {% if not entries %}
+            <div class="containers">
                 <h3 class="no-entries">No entries posted yet.</h3>
-            {% else %}
-            <nav>
-                {% for page in entries %}
-                    {% if loop.index != pageNum %}
-                        <a href="{{ url_for('blog.viewBlog', username=creator, pageNum=loop.index) }}">Page {{loop.index}}</a>
-                    {% else %}
-                        <p>Page {{loop.index}}</p>
-                    {% endif %}
-                {% endfor %}
-            </nav>
-        </div>
-
-        <div class="containers entries">
-            {% for entry in entries[pageNum - 1] %}
-                <div class="card">
-                    <div class="card-divider">
-                        <h4>{{ entry["title"] }}</h4>
-                        <br>
-                        <p>Posted at {{ entry["time"] }}</p>
-                    </div>
-                    {% if entry["pic"] != "" %}
-                    <div class="card-image">
-                        <img src="{{ entry['pic'] }}" />
-                    </div>
-                    {% endif %}
-                    <div class="card-section">
-                        {% for line in entry["post"] %}
-                            <p>{{ line }}</p>
+            </div>
+        {% else %}
+            <div class="containers">
+                <nav aria-label="Pagination">
+                    <ul class="pagination">
+                        {% for page in entries %}
+                            {% if loop.index != pageNum %}
+                                <li><a href="{{ url_for('blog.viewBlog', pageNum=loop.index) }}" aria-label="Page {{loop.index}}">Page {{loop.index}}</a></li>
+                            {% else %}
+                                <li class="current">Page {{loop.index}}</li>
+                            {% endif %}
                         {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
+                    </ul>
+                </nav>
+            </div>
 
-        <div class="containers">
-            <nav>
-                {% for page in entries %}
-                    {% if loop.index != pageNum %}
-                        <a href="{{ url_for('blog.viewBlog', username=creator, pageNum=loop.index) }}">Page {{loop.index}}</a>
-                    {% else %}
-                        <p>Page {{loop.index}}</p>
-                    {% endif %}
+            <div class="containers entries">
+                {% for entry in entries[pageNum - 1] %}
+                    <div class="card">
+                        <div class="card-divider">
+                            <h4>{{ entry["title"] }}</h4>
+                            <p>Posted at {{ entry["time"] }}</p>
+                        </div>
+                        {% if entry["pic"] != "" %}
+                            <div class="card-image">
+                                <img src="{{ entry['pic'] }}" />
+                            </div>
+                        {% endif %}
+                        <div class="card-section">
+                            {% for line in entry["post"] %}
+                                <p>{{ line }}</p>
+                            {% endfor %}
+                        </div>
+                    </div>
                 {% endfor %}
-            </nav>
-            {% endif %}
-        </div>
+            </div>
+
+            <div class="containers">
+                <nav aria-label="Pagination">
+                    <ul class="pagination">
+                    {% for page in entries %}
+                        {% if loop.index != pageNum %}
+                            <li><a href="{{ url_for('blog.viewBlog', pageNum=loop.index) }}" aria-label="Page {{loop.index}}">Page {{loop.index}}</a></li>
+                        {% else %}
+                            <li class="current">Page {{loop.index}}</li>
+                        {% endif %}
+                    {% endfor %}
+                    </ul>
+                </nav>
+            </div>
+        {% endif %}
     </body>
 {% endblock %}

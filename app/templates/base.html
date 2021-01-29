@@ -8,13 +8,25 @@
 <!-- Our CSS -->
 <link rel="stylesheet" href="/static/styles.css" />
 
-<!-- Compressed JavaScript -->
+<!-- ICON -->
+    <link rel="icon" href="https://www.svgrepo.com/show/48219/avocado.svg">
+
+<!-- Import Font -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat+Alternates">
+
+<!-- JQuery CDN -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- What-Input CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.10/what-input.min.js" integrity="sha512-4snZhaL41OLVJbrysFHLFItNF9pb4zzm/X6ag4srEFALI0Hns+FVZg22G/nofqTGliAyaeWxoTjTZpmbU3enXQ==" crossorigin="anonymous"></script>
+
+<!-- Foundation CDN -->
 <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o="
- crossorigin="anonymous">
-</script>
+ crossorigin="anonymous"></script>
+
 
 <div class="top-bar grid-x fluid stack-for-medium">
-	<div class="cell medium-4">
+	<div class="cell medium-5">
 		<ul class="dropdown menu" data-dropdown-menu>
 			<li class="menu-text">Solid Guacamole</li>
 			<li><a href="{{ url_for('blog.homepage') }}">Home</a></li>
@@ -23,7 +35,7 @@
 		</ul>
 	</div>
 
-    <div class="grid-x cell medium-6 align-center">
+    <div class="grid-x cell medium-5 align-center">
         <form action="{{ url_for('search.searchFunction') }}" class="grid-x row align-center" method="POST">
             <div class="input-group">
                 <input class="input-group-field flex-child-grow" type="text" name="keywords" id="keywords" placeholder="Enter search terms" required />
@@ -50,3 +62,7 @@
   {% endfor %}
   {% block content %}{% endblock %}
 </section>
+
+<script>
+    $(document).foundation()
+</script>
