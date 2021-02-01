@@ -189,13 +189,25 @@ table tr:nth-child(even) {
 }
 
 table td.desc {
+	width: 53%;
     word-wrap: normal;
     overflow-wrap: normal;
     word-break: normal;
     max-width: 400px;
 }
 
+table td.blogname {
+	width: 12%;
+    word-wrap: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+	max-width: 100px; 
+	overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 table td.blogusername {
+	width: 12%;
     word-wrap: normal;
     overflow-wrap: normal;
     word-break: normal;
@@ -204,8 +216,24 @@ table td.blogusername {
     text-overflow: ellipsis;
 }
 
+table td.blog-time {
+	width: 12%;
+	max-width: 200px;
+}
+
 table td.followcolumn {
+	width: 11%;
     max-width: 100px;
+}
+
+td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+tr:nth-child(5) {
+    overflow: auto;
 }
 
 #unfollow {
@@ -397,14 +425,4 @@ h1, h2, h3, h4 {
         position: absolute;
         z-index: -99999999;
     }
-}
-
-td {
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-
-tr:nth-child(5) {
-    overflow: auto;
 }

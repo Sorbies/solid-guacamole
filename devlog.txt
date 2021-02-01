@@ -160,7 +160,7 @@ ericL -- 2021-1-29
 ishitaG -- 2021-1-29
   - Fixed title on login/reg
   - Fixed blog description on view blog so that it is in a card-section and doesn't cause page to scroll horizontally
-    - Also changed background to make text more legible
+  - Also changed background to make text more legible
 
 ishitaG, michelleT -- 2021-1-29
   - Made table rows transparent with alternating color
@@ -169,3 +169,12 @@ ishitaG, michelleT -- 2021-1-29
 
 ishitaG -- 2021-1-29
   - Restyled 404 error page   
+
+ericL -- 2021-2-1
+  - Reset DigitalOcean droplet (minor typo in command ruined permissions for entire droplet so it had to be reset)
+
+ishitaG, michelleT, ianC -- 2021-2-1
+  - Installed Apache2 and got updated p1 working on the droplet
+
+ishitaG, michelleT -- 2021-2-1
+  - Fixed table width and overflow for home and following pages

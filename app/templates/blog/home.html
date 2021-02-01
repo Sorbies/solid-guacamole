@@ -19,9 +19,9 @@
             </thead>
             {% for blog in blogs %}
             <tr>
-                <td><a href="{{ url_for('blog.viewBlog', username=blog['username']) }}">{{ blog["blogname"] }}</a></td>
+                <td class="blogname"><a href="{{ url_for('blog.viewBlog', username=blog['username']) }}">{{ blog["blogname"] }}</a></td>
                 <td class="blogusername">{{ blog["username"] }}</td>
-                <td>{{ blog["time"] }}</td>
+                <td class="blog-time">{{ blog["time"] }}</td>
                 <td class="desc">{{ blog["blogdescription"] }}</td>
                 <td class="followcolumn">
                     {% if username != blog["username"] %} {% if blog["blogname"] not in following %}
