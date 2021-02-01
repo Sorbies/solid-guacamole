@@ -31,6 +31,8 @@ def create_app(test_config=None):
             # redirect user to login page
             if g.user is None:
                 return redirect(url_for("auth.login"))
+            else:
+                return render_template('error/404.html')
 
         app.add_url_rule('/', endpoint='index')
         return app

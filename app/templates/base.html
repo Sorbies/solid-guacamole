@@ -9,7 +9,7 @@
 <link rel="stylesheet" href="/static/styles.css" />
 
 <!-- ICON -->
-    <link rel="icon" href="https://www.svgrepo.com/show/48219/avocado.svg">
+<link rel="icon" href="https://www.svgrepo.com/show/48219/avocado.svg">
 
 <!-- Import Font -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat+Alternates">
@@ -29,9 +29,9 @@
 	<div class="cell medium-5">
 		<ul class="dropdown menu" data-dropdown-menu>
 			<li class="menu-text">Solid Guacamole</li>
-			<li><a href="{{ url_for('blog.homepage') }}">Home</a></li>
-			<li><a href="{{ url_for('blog.editBlog') }}">Edit My Blog</a></li>
-			<li><a href="{{ url_for('follow.followedBlogs') }}">Followed Blogs</a></li>
+			<li><a class="topdrop" href="{{ url_for('blog.homepage') }}">Home</a></li>
+			<li><a class="topdrop" href="{{ url_for('blog.editBlog') }}">Edit My Blog</a></li>
+			<li><a class="topdrop" href="{{ url_for('follow.followedBlogs') }}">Followed Blogs</a></li>
 		</ul>
 	</div>
 
@@ -48,7 +48,7 @@
 
     <div class="cell medium-2 grid-x align-right">
 		<ul class="dropdown menu align-right" data-dropdown-menu>
-            <li><a id="logout" href="{{ url_for('auth.logout') }}">Log Out, {{ username }}</a></li>
+            <li><a class="topdrop" id="logout" href="{{ url_for('auth.logout') }}">Log Out</a></li>
 		</ul>
     </div>    
 </div>

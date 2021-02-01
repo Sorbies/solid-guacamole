@@ -19,9 +19,13 @@
     margin: 0px;
 }
 
-.hero-section .hero-section-text {
-    color: whitesmoke;
-    text-shadow: 1px 1px 2px hsl(0, 0%, 4%);
+.hero-section-text {
+    color: white;
+    text-shadow: 2px 2px 4px hsl(0, 0%, 4%);
+}
+
+.hero-section-text * {
+    margin-left: 50px;
 }
 
 /* LOGIN/REGISTRATION FORM */
@@ -105,6 +109,10 @@ input#keywords {
     float: left;
 }
 
+.topdrop {
+    height: 45px;
+}
+
 /* CONTENT FOR ALL PAGES BESIDES LOGIN/REG*/
 .allpages {
     background: url("https://scottchoucino.com/wp-content/uploads/2016/12/ScottChoucino-1-1.jpg") no-repeat center center fixed; 
@@ -145,12 +153,20 @@ section.content {
     margin: 10px;
 }
 
-table {
-    background: rgba(255, 255, 255, 0);
+#transparent {
+	background: rgba(0, 0, 0, 0);
+}
+
+table * {
+	background: rgba(0, 0, 0, 0);
 }
 
 table thead {
     border: 0px;
+}
+
+table tbody *{
+    background: rgba(0, 0, 0, 0);
 }
 
 table th {
@@ -160,21 +176,51 @@ table th {
 
 table tr {
     height: 65px;
-    background-color: rgba(223, 162, 83, 0.432);
+	background: #ffa91e00;
+}
+
+
+table tr:nth-child(odd) {
+	background: rgba(224, 221, 255, 0.829);
+}
+
+table tr:nth-child(even) {
+	background: #ffa91ee5;
+}
+
+table td.desc {
+    word-wrap: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+    max-width: 400px;
+}
+
+table td.blogusername {
+    word-wrap: normal;
+    overflow-wrap: normal;
+    word-break: normal;
+    max-width: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+table td.followcolumn {
+    max-width: 100px;
 }
 
 #unfollow {
     margin: 0px;
     width: 140px;
+    font-weight: 900;
 }
 
 #follow {
     margin: 0px;
     width: 140px;
+    font-weight: 900;
 }
 
 /* EDIT BLOG */
-
 
 .loginForm {
     background: #2929298c;
@@ -183,7 +229,6 @@ table tr {
     border: 5px;
     border-color: whitesmoke;
 }
-
 
 div.containers form label {
     color: white;
@@ -229,16 +274,18 @@ div#editentriessection {
     background-color: rgba(252, 167, 56, 0.808);
 }
 
-
-
 /* VIEW BLOG ENTRIES */
 
 .card {
 	width: 80%;
 	margin: auto;
 	margin-bottom: 30px;
-    background: #2929298c;
+    background: #292929a6;
     color: white;
+}
+
+.card-section {
+    height: auto;
 }
 
 .card-divider {
@@ -262,6 +309,7 @@ div#editentriessection {
 
 .blog-desc {
 	color: white;
+    margin-left: 0px;
 }
 
 .no-entries {
@@ -275,6 +323,10 @@ div#editentriessection {
 }
 
 /* PAGINATION */
+
+.pagination {
+	margin-top: 16px;
+}
 .pagination .current {
     background-color: rgba(31, 66, 141, 0.74);
 }
@@ -303,7 +355,7 @@ h1, h2, h3, h4 {
     padding: 3px;
     font-weight: bold;
     animation-name: disappearing_msg;
-    animation-duration: 8s;
+    animation-duration: 2s;
     transition-timing-function: linear;
     animation-fill-mode: forwards;
     animation-iteration-count: 1;
@@ -335,9 +387,24 @@ h1, h2, h3, h4 {
         opacity: .1;
     }
 
+    99% {
+        opacity: 0;
+        position: static;
+    }
+
     100% {
         opacity: 0;
         position: absolute;
         z-index: -99999999;
     }
+}
+
+td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+tr:nth-child(5) {
+    overflow: auto;
 }

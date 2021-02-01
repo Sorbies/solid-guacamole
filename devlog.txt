@@ -1,5 +1,4 @@
-TEAM RIID DEVLOG
-
+TEAM SOLID GUACAMOLE DEVLOG
 
   -----------------------------------------------------------------------------------
   -----------------------------------------------------------------------------------
@@ -31,7 +30,6 @@ ishitaG, ianC -- 2021-1-17
 
 ericL -- 2021-1-17
   - changed droplet firewall configs to fix an ssh connection timing out error, added IG and IAC to ssh perms for droplet
-  - switched from working on root to joe on droplet
   - purged apache and redid all the steps to put the working basic flask app back up
 
 guac -- 2021-1-19
@@ -68,7 +66,7 @@ guac -- 2021-1-21
 
 ericL -- 2021-1-21
   - merged the alternate repl and repo into the main repl and repo
-  - updated README and devlog
+  - updated README
 
 ishitaG, michelleT, ericL -- 2021-1-21
   - BUG: sometimes refreshing the website leads to an internal server error, 
@@ -115,11 +113,10 @@ ericL, ianC -- 2021-1-26
     - Added semi transluscent background
   - Issue: pagination is not working correctly
   - To-do: center the edit entries with cards/decrease size of headers, decrease size of edit entry boxes
-  - Fixed search bar and button separation issue
 
 ishitaG, michelleT -- 2021-1-26
   - Styled the follow/unfollow buttons on all pages
-  - Fixed search bar issue with text not displaying correctly
+  - Fixed search bar issue with text not displaying correctly and spacing
   - Styled view blog page
     - Used card class to style entries, correctly format blog name/description/creator name
     - Properly align the entire container, as well as elements within it 
@@ -147,8 +144,28 @@ ishitaG, michelleT -- 2021-1-28
 
 ishitaG -- 2021-1-28
   - Restyled pages with new colors (added an orange/blye theme)
-  - BUG: viewing a blog gives routing error "werkzeug.routing.BuildError: Could not build url for endpoint 'blog.viewBlog' with values ['pageNum']. Did you forget to specify values ['username']?"
+  - BUG: viewing a blog gives routing error "werkzeug.routing.BuildError: Could not build url for endpoint 'blog.viewBlog' with values ['pageNum']. Did you forget to specify values ['username']?" (FIXED)
   - BUG: if user who is not logged goes to non-existent page, shows home page with 404 error (somehow user gets a blank login, but if they click anywhere redirected to home page) (FIXED)
+  - BUG: if logged in user goes to random page, Internal server error (FIXED)
   - Fixed bug with disappearing error message (too fast and weird background color)
+  - Modified nav bar so long usernames wouldn't disrupt spacing and alignment
   - Added Solid Guacamole logo in tab
-  - To-do: add transparency to table, format title on login/reg, move add entry to the left a little, hover on nav doesn't cover whole thing
+  - TO-DO: add transparency to table, format title on login/reg, move add entry to the left a little, hover on nav doesn't cover whole thing, add card to blog name/desc in case long, add space between follow/unfollow buttons on view blog page
+
+ericL -- 2021-1-29
+  - item from to-do done: hover on nav doesn't cover whole thing
+  - item from to-do done: move add entry to the left a little
+  - fixed table wrapping, cut off usernames with ellipse
+
+ishitaG -- 2021-1-29
+  - Fixed title on login/reg
+  - Fixed blog description on view blog so that it is in a card-section and doesn't cause page to scroll horizontally
+    - Also changed background to make text more legible
+
+ishitaG, michelleT -- 2021-1-29
+  - Made table rows transparent with alternating color
+  - Modified pagination styling
+  - TO-DO: if blank description, don't show card; fix table wrapping (adjust widths, max-width, ... at end)
+
+ishitaG -- 2021-1-29
+  - Restyled 404 error page   
